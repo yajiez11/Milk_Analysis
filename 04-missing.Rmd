@@ -1,3 +1,3 @@
 # Missing values
 
-# The dataset we will use for our project does not have any missing value.
+The dataset we will use for our project does not have any missing value.
