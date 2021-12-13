@@ -23,12 +23,12 @@ milk products, and etc. The cost categories of milk production includes hiring l
 insurance cost, and etc. From the data set, we would like to know the following question:
 
 
-* 1. What is the difference in returns of milk production among different states from the 
+1. What is the difference in returns of milk production among different states from the 
 Gross Value of Production (Milk Sold, Cattle, and other income)?
 
-* 2. How does the cost of hiring labor changed from 2016 to 2020 in the New York State?
+2. How does the cost of hiring labor changed from 2016 to 2020 in the New York State?
 
-* 3. Is there any positive or negative correlation between the cost of Purchased Feed and 
+3. Is there any positive or negative correlation between the cost of Purchased Feed and 
 the profit of Milk Sold from 2016 to 2020?
 
 
