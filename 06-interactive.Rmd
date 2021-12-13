@@ -1,15 +1,24 @@
 # Interactive component
 
+The aim of this section is to show to the readers that how one data file can be used to draw plots in 
+different point of views, and how information shown from one plot could be limited. The above two plot 
+tells different information about one data set. Each one of them has some limitations of showing some 
+aspects of the data. However, if we considering the two plots together, We can understand this data 
+more comprehensively.
 
 
 ## Description of the first interactive plot
+The first interactive plot is a graph with multiple lines, where each line represents a State of the United States. Each State has been assigned with a color so it is easier for the reader to recognize each State. Colors are randomlly assigned because similar colors represent connections in some way, and it is not reasonable to assume that there are relationships among each State regarding to the total revenue gained. It is easier for the readers to compare the trend of the total revenue gained among different States, or to find the trend of changing in total revenue among years of one State.The advantage of this graph is that it can show the total revenue trend very clearly! However, the disadvantage is that is it difficult to compare which parts of the United States tend to receive more revenue on seeling milk or milk product. That means, the distribution of the total revenue of States cannot be shown on this graph.
+
 
 
 <iframe src="milklines.html" width="700" height="700"></iframe>
 
 
-## Instructions for using the plot
-
+* Instructions for using the plot
+1. Clicking on the State names on the right, and the corresponding line can be added or deleted in the plot.
+2. Each color represents one State, so the readers will not get confused about which line match to which State.
+3. The units of the Y-axis is dollars per hundred pounds of milk sold
 
 
 
@@ -21,15 +30,14 @@
 <iframe src="revenueMap.html" width="700" height="700"></iframe>
 
 
-## Instructions for using the map
+* Instructions for using the map
 
 
 
-## references:
+* references:
 1.https://bl.ocks.org/dnprock/5215cc464cfb9affd283
 2.https://bl.ocks.org/d3noob/635735a3de2909ae06669096fbadc0ed
 3.https://github.com/topojson/us-atlas
 4.https://www.youtube.com/watch?v=OKw0KCH9rZA
 
 
-<iframe src="milklines.html" width="700" height="700"></iframe>
