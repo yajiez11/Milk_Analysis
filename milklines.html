@@ -37,7 +37,7 @@ path {
     p {color:blue;}
 
 </style>
-  <h1><b>Annual Total Revenue in Dollars Per Hundred Pounds Weight of Cows</b></h1>
+  <h1><b>Annual Total Revenue in Dollars</b></h1>
   <h4>Instructions:</h4>
     <h4>1. Clicking on the State names on the right</h4>
     <h4>2. Each color represents one State</h4>
@@ -60,8 +60,8 @@ path {
 
 <script>
 
-var width = 800,
-    height = 500;
+var width = 500,
+    height = 300;
 
 var format = d3.timeParse("%Y");
 
@@ -108,7 +108,7 @@ d3.csv("https://raw.githubusercontent.com/yajiez11/Milk_Analysis/main/data/total
      "mediumblue", "rosybrow",
       "cyan", "rosybrown",
      "maroon", "lime",
-     "yellow", "crimson",
+     "darkolivegreen", "crimson",
      "lightsteelblue", "darkslateblue",
      "lightslategray", "darkslategray",
      "burlywood", "fuchsia"
@@ -131,8 +131,8 @@ d3.csv("https://raw.githubusercontent.com/yajiez11/Milk_Analysis/main/data/total
 
         // Add the Legend
         svg.append("text")
-            .attr("x", 900)  // space legend
-            .attr("y", height-25*i)
+            .attr("x", 550)  // space legend
+            .attr("y", height-15*i)
             .attr("text-anchor", "end")
             .attr("class", "legend")    // style the legend
             .style("fill", function() { return d.color = color(d.key); }) // Add the colours dynamically
@@ -153,7 +153,7 @@ d3.csv("https://raw.githubusercontent.com/yajiez11/Milk_Analysis/main/data/total
   // Add x Axis
   svg.append("g")
       .attr("class", "axis")
-      .attr("transform", "translate(0," + 500 + ")")
+      .attr("transform", "translate(0," + 300 + ")")
       .call(d3.axisBottom(x));
 
   // Add y Axis

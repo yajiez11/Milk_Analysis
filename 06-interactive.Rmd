@@ -1,3 +1,35 @@
 # Interactive component
 
 
+
+## Description of the first interactive plot
+
+
+<iframe src="milklines.html" width="700" height="700"></iframe>
+
+
+## Instructions for using the plot
+
+
+
+
+
+
+## Description of the second interactive plot
+
+
+<iframe src="revenueMap.html" width="700" height="700"></iframe>
+
+
+## Instructions for using the map
+
+
+
+## references:
+1.https://bl.ocks.org/dnprock/5215cc464cfb9affd283
+2.https://bl.ocks.org/d3noob/635735a3de2909ae06669096fbadc0ed
+3.https://github.com/topojson/us-atlas
+4.https://www.youtube.com/watch?v=OKw0KCH9rZA
+
+
+<iframe src="milklines.html" width="700" height="700"></iframe>

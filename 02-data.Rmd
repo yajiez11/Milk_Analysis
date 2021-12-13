@@ -44,5 +44,5 @@ Year: the record year
 Value: the amount of money, corresponds to the categories of Item2
 
 
-***Issues with this dataset: ***
+***Issues with this data set: ***
 
