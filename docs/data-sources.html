@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | Milk_Analysis</title>
-  <meta name="description" content="Chapter 2 Data sources | Milk_Analysis" />
+  <title>Chapter 2 Data sources | MilkStatesUS</title>
+  <meta name="description" content="Chapter 2 Data sources | MilkStatesUS" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | Milk_Analysis" />
+  <meta property="og:title" content="Chapter 2 Data sources | MilkStatesUS" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | Milk_Analysis" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | MilkStatesUS" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Yajie Zhang, Mengchen Xu" />
 
 
-<meta name="date" content="2021-11-19" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="data-transformation.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -70,15 +70,22 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">milk_analysis</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#milk-cost-of-production-estimates"><i class="fa fa-check"></i><b>2.1</b> Milk Cost of Production Estimates</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#description-of-the-first-interactive-plot"><i class="fa fa-check"></i><b>6.1</b> Description of the first interactive plot</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#description-of-the-second-interactive-plot"><i class="fa fa-check"></i><b>6.2</b> Description of the second interactive plot</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -91,7 +98,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Milk_Analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MilkStatesUS</a>
           </h1>
         </div>
 
@@ -101,7 +108,125 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>The primary data source we used for this project is the Economic Research Service of
+the U.S.Department of Agriculture *<a href="https://www.usda.gov/">(ERS)*</a>. ERS makes estimates
+of the milk production costs by using the dairy version of the data from the
+Agricultural Resource Management Survey (ARMS).The estimates the ERS made are based both
+on the actual data gathered from the ARMS and the estimating models. ERS updated the
+estimates twice a year, one in May and one in October. October released the final version.
+The estimates is annual milk cost of production estimates by State and by size of the
+operation. The Milk Cost of Production Estimates data is better used with non-analytical
+purposes. More information and background of the data can be found at this
+<a href="https://www.ers.usda.gov/data-products/milk-cost-of-production-estimates/methods/"><em>webpage</em></a>.
+All members of our team are responsible for collecting the data. The data is collected by
+directly download the .xlsx file from the official webpage of the Economic Research Service.
+While we are deciding which dataset is better to illstate our purposes, we also considered
+another data set called <a href="https://www.ers.usda.gov/data-products/us-food-imports/us-food-imports/#All%20tables%20in%20one%20file"><em>U.S. Food Imports</em></a>. There is a dairy section
+in the data set. However, we finally decided that the milk production data can better
+express the milk related problem in the United States rather than the import activity.
+More details about the data set we used for this project are as follows:</p>
+<div id="milk-cost-of-production-estimates" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Milk Cost of Production Estimates</h2>
+<p>This data set was downloaded from the Economic Research Service contains the milk production data of the United States from 2016-2020.</p>
+<pre><code>##   Commodity          CommodityId    Category           CategoryId        Item              Item2          
+##  Length:2900        Min.   :180   Length:2900        Min.   :1.000   Length:2900        Length:2900       
+##  Class :character   1st Qu.:180   Class :character   1st Qu.:2.000   Class :character   Class :character  
+##  Mode  :character   Median :180   Mode  :character   Median :2.000   Mode  :character   Mode  :character  
+##                     Mean   :180                      Mean   :2.655                                        
+##                     3rd Qu.:180                      3rd Qu.:3.000                                        
+##                     Max.   :180                      Max.   :6.000                                        
+##      ItemId          Units             UnitsAbr            UnitsId         Region             RegionId    
+##  Min.   : 220.0   Length:2900        Length:2900        Min.   :193.0   Length:2900        Min.   : 10.0  
+##  1st Qu.: 570.0   Class :character   Class :character   1st Qu.:230.0   Class :character   1st Qu.:167.5  
+##  Median : 815.0   Mode  :character   Mode  :character   Median :230.0   Mode  :character   Median :215.0  
+##  Mean   : 718.1                                         Mean   :229.1                      Mean   :207.6  
+##  3rd Qu.: 900.0                                         3rd Qu.:230.0                      3rd Qu.:262.5  
+##  Max.   :1070.0                                         Max.   :240.0                      Max.   :310.0  
+##    Country            CountryId       Year          Value           SurveyBaseYear         Note          
+##  Length:2900        Min.   :10   Min.   :2016   Min.   :  -10.210   Length:2900        Length:2900       
+##  Class :character   1st Qu.:10   1st Qu.:2017   1st Qu.:    0.270   Class :character   Class :character  
+##  Mode  :character   Median :10   Median :2018   Median :    1.225   Mode  :character   Mode  :character  
+##                     Mean   :10   Mean   :2018   Mean   :  717.476                                        
+##                     3rd Qu.:10   3rd Qu.:2019   3rd Qu.:    9.953                                        
+##                     Max.   :10   Max.   :2020   Max.   :23579.000                                        
+##      Order            Size               SizeId  
+##  Min.   : 350.0   Length:2900        Min.   :90  
+##  1st Qu.: 720.0   Class :character   1st Qu.:90  
+##  Median : 960.0   Mode  :character   Median :90  
+##  Mean   : 861.7                      Mean   :90  
+##  3rd Qu.:1050.0                      3rd Qu.:90  
+##  Max.   :1230.0                      Max.   :90</code></pre>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-4">Table 2.1: </span>Major variables used</caption>
+<colgroup>
+<col width="24%" />
+<col width="13%" />
+<col width="5%" />
+<col width="9%" />
+<col width="47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Item2</th>
+<th align="left">Region</th>
+<th align="right">Year</th>
+<th align="right">Value</th>
+<th align="left">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Milk sold</td>
+<td align="left">U.S. total</td>
+<td align="right">2016</td>
+<td align="right">16.83</td>
+<td align="left">Revenue of sold milk</td>
+</tr>
+<tr class="even">
+<td align="left">Purchased feed</td>
+<td align="left">California</td>
+<td align="right">2016</td>
+<td align="right">7.70</td>
+<td align="left">Purchased feed</td>
+</tr>
+<tr class="odd">
+<td align="left">Total, feed costs</td>
+<td align="left">Illinois</td>
+<td align="right">2017</td>
+<td align="right">11.21</td>
+<td align="left">Cost of feeding milk cows</td>
+</tr>
+<tr class="even">
+<td align="left">Taxes and insurance</td>
+<td align="left">Kentucky</td>
+<td align="right">2016</td>
+<td align="right">0.13</td>
+<td align="left">Taxe and insurance cost</td>
+</tr>
+<tr class="odd">
+<td align="left">Total, costs listed</td>
+<td align="left">New York</td>
+<td align="right">2016</td>
+<td align="right">25.38</td>
+<td align="left">Total cost</td>
+</tr>
+<tr class="even">
+<td align="left">Output per cow (pounds)</td>
+<td align="left">Pennsylvania</td>
+<td align="right">2016</td>
+<td align="right">19915.00</td>
+<td align="left">The amount of milk per cow produced in pounds</td>
+</tr>
+</tbody>
+</table>
+<p>These are the major variables used for this project.
+Item2: listed the categories of cost or revenue activities.
+Region: states of the United States
+Year: the record year
+Value: the amount of money, corresponds to the categories of Item2</p>
+<p><strong><em>Issues with this data set: </em></strong></p>
 
+</div>
 </div>
             </section>
 
@@ -140,7 +265,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/02-data.Rmd",
+"link": "https://github.com/yajiez11/Milk_Analysis/edit/main/02-data.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -148,7 +273,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/02-data.Rmd",
+"link": "https://github.com/yajiez11/Milk_Analysis/blob/main/02-data.Rmd",
 "text": null
 },
 "download": null,

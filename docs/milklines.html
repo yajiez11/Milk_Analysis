@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8.csv">
+
+<head>
+
+    <title>Milk States</title>
+
+<style> 
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.legend {
+    font-size: 16px;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+</style>
+
+   <style type="text/css">
+    h1 {color:orange;}     /* CSS styling */
+    p {color:blue;}
+
+</style>
+  <h1><b>Annual Total Revenue in Dollars</b></h1>
+  <h4>Instructions:</h4>
+    <h4>1. Clicking on the State names on the right</h4>
+    <h4>2. Each color represents one State</h4>
+</head>
+
+<body>
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src=
+    "https://d3js.org/d3-color.v1.min.js">
+    </script> 
+<script src=
+    "https://d3js.org/d3-interpolate.v1.min.js">
+    </script> 
+<script src= "
+     https://d3js.org/d3-scale-chromatic.v1.min.js">
+    </script> 
+<script src="http://colorbrewer2.org/export/colorbrewer.js"></script>
+
+<script>
+
+var width = 500,
+    height = 300;
+
+var format = d3.timeParse("%Y");
+
+var x = d3.scaleTime().range([0, width]);  
+var y = d3.scaleLinear().range([height,0]);
+
+// Define the line
+var priceline = d3.line()   
+    .x(function(d) { return x(d.Year); })
+    .y(function(d) { return y(d.TotalRevenue); });
+    
+// Adds the svg canvas
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", 1200)
+        .attr("height", 600)
+    .append("g")
+        .attr("transform", 
+              "translate(" + 50 + "," + 30 + ")");
+
+// Get the data
+d3.csv("https://raw.githubusercontent.com/yajiez11/Milk_Analysis/main/data/totalRevenue.csv").then(function(data) {
+
+  data.forEach(function(d) {
+        d.Region = d.Region;
+        d.Year = format(d.Year);
+        d.TotalRevenue = +d.TotalRevenue;
+    });
+
+    x.domain(d3.extent(data, function(d) { return d.Year; }));
+    y.domain([15, d3.max(data, function(d) { return d.TotalRevenue; })]);
+
+    // Group by symbol
+    dataNest = Array.from(
+        d3.group(data, d => d.Region), ([key, value]) => ({key, value})
+      );
+  
+    // set the colour scale
+    
+    var d3_category20 = [
+     "gold", "red",
+     "lightpink", "deeppink",
+     "orangered", "saddlebrown",
+     "mediumblue", "rosybrow",
+      "cyan", "rosybrown",
+     "maroon", "lime",
+     "darkolivegreen", "crimson",
+     "lightsteelblue", "darkslateblue",
+     "lightslategray", "darkslategray",
+     "burlywood", "fuchsia"
+    ];
+
+    d3_scale_category20 = function() {
+    return d3.scaleOrdinal().range(d3_category20);};
+
+    var color =  d3_scale_category20() 
+
+    legendSpace = width/dataNest.length; // spacing for the legend
+
+    dataNest.forEach(function(d,i) { 
+
+        svg.append("path")
+            .attr("class", "dots")
+            .style("stroke", function() { return d.color = color(d.key); })//add color
+            .attr("id", 'tag'+d.key.replace(/\s+/g, '')) // show disappear
+            .attr("d", priceline(d.value));
+
+        // Add the Legend
+        svg.append("text")
+            .attr("x", 550)  // space legend
+            .attr("y", height-15*i)
+            .attr("text-anchor", "end")
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { return d.color = color(d.key); }) // Add the colours dynamically
+            .on("click", function(){
+           
+                var active   = d.active ? false : true,
+                newOpacity = active ? 0 : 1; 
+
+                d3.select("#tag"+d.key.replace(/\s+/g, ''))
+                    .transition().duration(100) 
+                    .style("opacity", newOpacity); 
+             
+                d.active = active;
+                })  
+            .text(d.key); 
+    });
+
+  // Add x Axis
+  svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + 300 + ")")
+      .call(d3.axisBottom(x));
+
+  // Add y Axis
+  svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y));
+});
+
+</script>
+</body>
+</html>
+
+
+<!---references: https://bl.ocks.org/d3noob/635735a3de2909ae06669096fbadc0ed --->

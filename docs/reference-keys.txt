@@ -1,7 +1,11 @@
+tab:unnamed-chunk-4
 introduction
 data-sources
+milk-cost-of-production-estimates
 data-transformation
 missing-values
 results
 interactive-component
+description-of-the-first-interactive-plot
+description-of-the-second-interactive-plot
 conclusion

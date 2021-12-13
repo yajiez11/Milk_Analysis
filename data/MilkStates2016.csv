@@ -1,5 +1,5 @@
 ﻿Commodity,CommodityId,Category,CategoryId,Item,Item2,ItemId,Units,UnitsAbr,UnitsId,Region,RegionId,Country,CountryId,Year,Value,SurveyBaseYear,Note,Order,Size,SizeId
-Milk,180,Gross value of production,1,Milk sold,Milk sold,220,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2016,16.83,Base survey of 2016,,350,No specific size,90
+Milk,180,Gross value of production,1,Milk sold,Milk sold,220,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2016,16.83,Base survey of 2016,Revenue of sold milk,350,No specific size,90
 Milk,180,Gross value of production,1,Milk sold,Milk sold,220,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2017,18.25,Base survey of 2016,,350,No specific size,90
 Milk,180,Gross value of production,1,Milk sold,Milk sold,220,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2018,16.82,Base survey of 2016,,350,No specific size,90
 Milk,180,Gross value of production,1,Milk sold,Milk sold,220,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2019,19.26,Base survey of 2016,,350,No specific size,90
@@ -404,7 +404,7 @@ Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundred
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2018,6.76,Base survey of 2016,,540,No specific size,90
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2019,7.2,Base survey of 2016,,540,No specific size,90
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,U.S. total,10,United States,10,2020,6.93,Base survey of 2016,,540,No specific size,90
-Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2016,7.7,Base survey of 2016,,540,No specific size,90
+Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2016,7.7,Base survey of 2016,Purchased feed,540,No specific size,90
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2017,7.49,Base survey of 2016,,540,No specific size,90
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2018,7.79,Base survey of 2016,,540,No specific size,90
 Milk,180,Operating costs,2,Purchased feed,Purchased feed,390,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2019,8.31,Base survey of 2016,,540,No specific size,90
@@ -710,7 +710,7 @@ Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars p
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2019,9.93,Base survey of 2016,,720,No specific size,90
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,California,91,United States,10,2020,9.5,Base survey of 2016,,720,No specific size,90
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2016,11.28,Base survey of 2016,,720,No specific size,90
-Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2017,11.21,Base survey of 2016,,720,No specific size,90
+Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2017,11.21,Base survey of 2016,Cost of feeding milk cows,720,No specific size,90
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2018,12.09,Base survey of 2016,,720,No specific size,90
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2019,12.89,Base survey of 2016,,720,No specific size,90
 Milk,180,Operating costs,2,"Total, feed costs","Total, feed costs",570,dollars per hundredweight sold,$ / cwt sold,230,Illinois,140,United States,10,2020,12.26,Base survey of 2016,,720,No specific size,90
@@ -2124,7 +2124,7 @@ Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollar
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Iowa,160,United States,10,2018,0.25,Base survey of 2016,,1050,No specific size,90
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Iowa,160,United States,10,2019,0.25,Base survey of 2016,,1050,No specific size,90
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Iowa,160,United States,10,2020,0.25,Base survey of 2016,,1050,No specific size,90
-Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Kentucky,170,United States,10,2016,0.13,Base survey of 2016,,1050,No specific size,90
+Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Kentucky,170,United States,10,2016,0.13,Base survey of 2016,Taxe and insurance cost,1050,No specific size,90
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Kentucky,170,United States,10,2017,0.13,Base survey of 2016,,1050,No specific size,90
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Kentucky,170,United States,10,2018,0.13,Base survey of 2016,,1050,No specific size,90
 Milk,180,Allocated overhead,3,Taxes and insurance,Taxes and insurance,900,dollars per hundredweight sold,$ / cwt sold,230,Kentucky,170,United States,10,2019,0.14,Base survey of 2016,,1050,No specific size,90
@@ -2449,7 +2449,7 @@ Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars 
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,Missouri,210,United States,10,2018,27.49,Base survey of 2016,,1090,No specific size,90
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,Missouri,210,United States,10,2019,28.32,Base survey of 2016,,1090,No specific size,90
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,Missouri,210,United States,10,2020,27.83,Base survey of 2016,,1090,No specific size,90
-Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,New York,220,United States,10,2016,25.38,Base survey of 2016,,1090,No specific size,90
+Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,New York,220,United States,10,2016,25.38,Base survey of 2016,Total cost,1090,No specific size,90
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,New York,220,United States,10,2017,25.86,Base survey of 2016,,1090,No specific size,90
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,New York,220,United States,10,2018,27.67,Base survey of 2016,,1090,No specific size,90
 Milk,180,Costs listed,4,"Total, costs listed","Total, costs listed",940,dollars per hundredweight sold,$ / cwt sold,230,New York,220,United States,10,2019,28.9,Base survey of 2016,,1090,No specific size,90
@@ -2864,7 +2864,7 @@ Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,po
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Oregon,240,United States,10,2018,21235,Base survey of 2016,,1230,No specific size,90
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Oregon,240,United States,10,2019,21235,Base survey of 2016,,1230,No specific size,90
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Oregon,240,United States,10,2020,21235,Base survey of 2016,,1230,No specific size,90
-Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Pennsylvania,250,United States,10,2016,19915,Base survey of 2016,,1230,No specific size,90
+Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Pennsylvania,250,United States,10,2016,19915,Base survey of 2016,The amount of milk per cow produced in pounds,1230,No specific size,90
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Pennsylvania,250,United States,10,2017,19916,Base survey of 2016,,1230,No specific size,90
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Pennsylvania,250,United States,10,2018,19916,Base survey of 2016,,1230,No specific size,90
 Milk,180,Supporting information,6,Output per cow,Output per cow (pounds),1070,pounds,lbs,240,Pennsylvania,250,United States,10,2019,19915,Base survey of 2016,,1230,No specific size,90
