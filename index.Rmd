@@ -7,7 +7,18 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-Imagine a situation, when you opened your refrigerator, what is the first thing that you can see? I believe that at most of the time, it will be Milk! Milk is very important in our daily life. We can directly drink it, and we can also drink it with coffee, or with cereal. Many food are made with milk, such as cheese, ice-cream, and etc. Milk is everywhere in our life! According to Statista, the U.S per capita consumption of dairy products is around 655 pounds in 2020. With the large consumption of milk in the U.S, it stimulates our interests that how much milk is produced every year in the United States and how much profits can farmers make by selling milk and milk products? With the curiosity about the milk production in the United States, we went to the U.s. Department of Agriculture and the Economic Research Service website, and found an interesting data set called Milk Cost of Production Estimates, which includes the average pounds of milk produced each year among the States in the U.S.The data set also includes the income, expenditure, and opportunity cost of milk production from year 2016 to year 2020. The income category includes the money gained from selling milk, milk products, and etc. The cost categories of milk production includes hiring label, feeding cost, insurance cost, and etc. From the data set, we would like to know the following question:
+Imagine a situation, when you opened your refrigerator, what is the first thing that you can see? I believe that
+at most of the time, it will be Milk! Milk is very important in our daily life. We can directly drink it, and we 
+can also drink it with coffee, or with cereal. Many food are made with milk, such as cheese, ice-cream, and etc. Milk is everywhere in our life! According to Statista, the U.S per capita consumption of dairy products is around 655 pounds in 2020. With the large consumption of milk in the U.S, it stimulates our interests that how much milk
+is produced every year in the United States and how much profits can farmers make by selling milk and milk products?
+With the curiosity about the milk production in the United States, we went to the U.s. Department of Agriculture and
+the Economic Research Service website, and found an interesting data set called Milk Cost of Production Estimates,
+which includes the average pounds of milk produced each year among the States in the U.S.The data set also includes
+the income, expenditure, and opportunity cost of milk production from year 2016 to year 2020. The income category
+includes the money gained from selling milk, milk products, and etc. The cost categories of milk production includes
+hiring label, feeding cost, insurance cost, and etc. From the data set, we would like to know the following
+question:
+
 
 ## 1. What is the difference in returns of milk production among different states from the 
 Gross Value of Production (Milk Sold, Cattle, and other income)?
@@ -17,6 +28,11 @@ Gross Value of Production (Milk Sold, Cattle, and other income)?
 ## 3. Is there any positive or negative correlation between the cost of Purchased Feed and 
 the profit of Milk Sold from 2016 to 2020?
 
-In the next chapters, we will discuss about these questions, and provide our insights regarding to these aspects in a new way. Hopefully, after reading our project, the authors will learn some interesting facts about the milk production in the United States. Also, we will working hard to encourage the reader to think about the Milk Production in the United States from different aspects after reading our project. 
+
+In the next chapters, we will discuss about these questions, and provide our insights regarding to these aspects in
+a new way. Hopefully, after reading our project, the authors will learn some interesting facts about the milk
+production in the United States. Also, we will working hard to encourage the reader to think about the Milk
+Production in the United States from different aspects after reading our project. 
+
 
 For more details of this project, go to our Github page at : https://github.com/yajiez11/Milk_Analysis.
