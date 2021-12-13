@@ -9,7 +9,8 @@ site: bookdown::bookdown_site
 
 Imagine a situation, when you opened your refrigerator, what is the first thing that you can see? I believe that
 at most of the time, it will be Milk! Milk is very important in our daily life. We can directly drink it, and we 
-can also drink it with coffee, or with cereal. Many food are made with milk, such as cheese, ice-cream, and etc. Milk is everywhere in our life! According to Statista, the U.S per capita consumption of dairy products is around 655 pounds in 2020. With the large consumption of milk in the U.S, it stimulates our interests that how much milk
+can also drink it with coffee, or with cereal. Many food are made with milk, such as cheese, ice-cream, and etc.
+Milk is everywhere in our life! According to Statista, the U.S per capita consumption of dairy products is around 655 pounds in 2020. With the large consumption of milk in the U.S, it stimulates our interests that how much milk
 is produced every year in the United States and how much profits can farmers make by selling milk and milk products?
 With the curiosity about the milk production in the United States, we went to the U.s. Department of Agriculture and
 the Economic Research Service website, and found an interesting data set called Milk Cost of Production Estimates,
