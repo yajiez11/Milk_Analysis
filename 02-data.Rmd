@@ -22,9 +22,10 @@ More details about the data set we used for this project are as follows:
 
 
 ## Milk Cost of Production Estimates
-This data set was downloaded from the Economic Research Service contains the milk production data of the United States from 2016-2020.
+This data set was downloaded from the Economic Research Service contains the milk production data of the United States from 2016-2020. The data set has 2900 rows 21 columns.
 
 ```{r}
+library(janitor)
 milkState<- readr::read_csv(here::here("./data/MilkStates2016.csv"))
 summary(milkState)
 ```
@@ -44,7 +45,8 @@ Year: the record year
 Value: the amount of money, corresponds to the categories of Item2
 
 
-***Issues with this data set: ***
+Issues with this data set: 
+
 Even though this data set is well organized. It still has some issues.
 1. The data value is not accurate enough to be used for analysis purposes.By reading the data 
 set background on Economic Research Service's official website, it is easier to find that some 
@@ -56,3 +58,36 @@ production industry.
 that the amount of milk production and seeling can be ignored compared to these 19 States. 
 However, it is imappropreate to just treat the milk production of the other States as 
 "NO MILK PRODUCED" at all. 
+
+
+## Other Minor Date Set used
+1. name.tsv
+name.tsv is a flie about the States names and their abbreviations of the United States. This data is found online from [*this website*](https://gist.github.com/lbui30/65c2707e615841efaf35959aedac8ca9). The original name of the data set is called "us-state-names.tsv". We used this data set to draw the interactive map of the six section.A sample of the data is listed below:
+(the data set has 60 rows 3 columns)
+```{r, echo=FALSE, results='asis'}
+names<- readr::read_tsv(here::here("data/name.tsv"))
+knitr::kable(names[c(1,2,3), ], caption = "State Names",
+             row.names = F,font_size = 10)
+```
+
+
+Issues with this data set:
+
+*The number of States in the United States are too much for us, since we only need to consider some of the States. 
+
+
+
+
+2. state.json
+state is a flie about the geological information of the States in the United States. This data is found online 
+from [*this website*](https://gist.github.com/lbui30/65c2707e615841efaf35959aedac8ca9). The original name of 
+the data set is called "states-10m.json". We used this data set to draw the interactive map of the six 
+section as well. The json file is too large to be shown here that you can find it in our github 
+[*here*](https://github.com/yajiez11/Milk_Analysis/blob/main/data/state.json).
+
+
+
+
+Issues with this data set:
+
+*The number inside this data set includes too much geological numbers to be shown in R, and many of the data is not useful. 

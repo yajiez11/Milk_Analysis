@@ -1,1 +1,37 @@
 # Data transformation
+
+
+
+
+
+
+## Data Transformation for Interactive Plot
+Only used columns Region, Year and Value for the Total, gross value of production for the 
+interactive plots in section 6. This data file is called totalRevenue.csv
+```{r}
+library(tidyverse)
+milkStates <- read.csv(file = 'data/MilkStates2016.csv')
+milkStates <- milkStates%>%
+  filter(ItemId==380)
+milkStates <- milkStates[,c(11,15,16)]
+knitr::kable(milkStates[c(1:7), ], caption = "Variable Used for Interactive Plot",
+             row.names = F,font_size = 10)
+
+```
+
+
+
+Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in 
+the interactive plot section. This data file is called totalRevenue_n.csv
+```{r}
+milkStates <- read.csv(file = 'data/MilkStates2016.csv')
+milkStates <- milkStates%>%
+  filter(ItemId==380)
+milkStates <- milkStates[,c(11,15,16)]
+milkNew <- milkStates %>%
+  pivot_wider(id_cols = c(Region,Year),names_from = Year,values_from = Value) %>%
+  rowwise()
+knitr::kable(milkNew[c(1,2), ], caption = "Pivot Wider version of totalRevenue.csv",
+             row.names = F,font_size = 10)
+```
+

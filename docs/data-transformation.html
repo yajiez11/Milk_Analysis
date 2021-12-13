@@ -77,8 +77,12 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#milk-cost-of-production-estimates"><i class="fa fa-check"></i><b>2.1</b> Milk Cost of Production Estimates</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#other-minor-date-set-used"><i class="fa fa-check"></i><b>2.2</b> Other Minor Date Set used</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-transformation-for-interactive-plot"><i class="fa fa-check"></i><b>3.1</b> Data Transformation for Interactive Plot</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
@@ -108,7 +112,92 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<div id="data-transformation-for-interactive-plot" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Data Transformation for Interactive Plot</h2>
+<p>Only used columns Region, Year and Value for the Total, gross value of production for the
+interactive plots in section 6. This data file is called totalRevenue.csv</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 3.1: </span>Variable Used for Interactive Plot</caption>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">Year</th>
+<th align="right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2016</td>
+<td align="right">18.84</td>
+</tr>
+<tr class="even">
+<td align="left">U.S. total</td>
+<td align="right">2017</td>
+<td align="right">20.12</td>
+</tr>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2018</td>
+<td align="right">18.58</td>
+</tr>
+<tr class="even">
+<td align="left">U.S. total</td>
+<td align="right">2019</td>
+<td align="right">21.02</td>
+</tr>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2020</td>
+<td align="right">20.65</td>
+</tr>
+<tr class="even">
+<td align="left">California</td>
+<td align="right">2016</td>
+<td align="right">18.19</td>
+</tr>
+<tr class="odd">
+<td align="left">California</td>
+<td align="right">2017</td>
+<td align="right">19.61</td>
+</tr>
+</tbody>
+</table>
+<p>Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in
+the interactive plot section. This data file is called totalRevenue_n.csv</p>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 3.2: </span>Pivot Wider version of totalRevenue.csv</caption>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">2016</th>
+<th align="right">2017</th>
+<th align="right">2018</th>
+<th align="right">2019</th>
+<th align="right">2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">18.84</td>
+<td align="right">20.12</td>
+<td align="right">18.58</td>
+<td align="right">21.02</td>
+<td align="right">20.65</td>
+</tr>
+<tr class="even">
+<td align="left">California</td>
+<td align="right">18.19</td>
+<td align="right">19.61</td>
+<td align="right">18.73</td>
+<td align="right">21.31</td>
+<td align="right">21.17</td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </div>
             </section>
 

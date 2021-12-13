@@ -9,3 +9,7 @@ interactive-component
 description-of-the-first-interactive-plot
 description-of-the-second-interactive-plot
 conclusion
+tab:unnamed-chunk-3
+other-minor-date-set-used
+data-transformation-for-interactive-plot
+tab:unnamed-chunk-2
