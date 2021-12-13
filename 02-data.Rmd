@@ -2,11 +2,23 @@
 
 
 
-
-
-
-The primary data source we used for this project is the [*Economic Research Service of the U.S. Department of Agriculture (ERS)*](https://www.usda.gov/). ERS makes estimates of the milk production costs by using the dairy version of the data from the Agricultural Resource Management Survey (ARMS).The estimates the ERS made are based both on the actual data gathered from the ARMS and the estimating models. ERS updated the estimates twice a year, one in May and one in October. October released the final version. The estimates is annual milk cost of production estimates by State and by size of the operation. The Milk Cost of Production Estimates data is better used with non-analytical purposes. More information and background of the data can be found at [*this webpage*](https://www.ers.usda.gov/data-products/milk-cost-of-production-estimates/methods/). 
-All members of our team are responsible for collecting the data. The data is collected by directly download the .xlsx file from the official webpage of  the Economic Research Service. While we are deciding which dataset is better to illstate our purposes, we also considered another data set called [*U.S. Food Imports*](https://www.ers.usda.gov/data-products/us-food-imports/us-food-imports/#All%20tables%20in%20one%20file). There is a dairy section in the data set. However, we finally decided that the milk production data can better express the milk related problem in the United States rather than the import activity. More details about the data set we used for this project are as follows:
+The primary data source we used for this project is the Economic Research Service of 
+the U.S.Department of Agriculture *[(ERS)*](https://www.usda.gov/). ERS makes estimates
+of the milk production costs by using the dairy version of the data from the
+Agricultural Resource Management Survey (ARMS).The estimates the ERS made are based both
+on the actual data gathered from the ARMS and the estimating models. ERS updated the 
+estimates twice a year, one in May and one in October. October released the final version.
+The estimates is annual milk cost of production estimates by State and by size of the 
+operation. The Milk Cost of Production Estimates data is better used with non-analytical
+purposes. More information and background of the data can be found at this 
+[*webpage*](https://www.ers.usda.gov/data-products/milk-cost-of-production-estimates/methods/).
+All members of our team are responsible for collecting the data. The data is collected by 
+directly download the .xlsx file from the official webpage of  the Economic Research Service. 
+While we are deciding which dataset is better to illstate our purposes, we also considered 
+another data set called [*U.S. Food Imports*](https://www.ers.usda.gov/data-products/us-food-imports/us-food-imports/#All%20tables%20in%20one%20file). There is a dairy section 
+in the data set. However, we finally decided that the milk production data can better 
+express the milk related problem in the United States rather than the import activity. 
+More details about the data set we used for this project are as follows:
 
 
 ## Milk Cost of Production Estimates
@@ -18,11 +30,6 @@ summary(milkState)
 ```
 
 
-```{r, echo=FALSE, results='asis'}
-milkState<- readr::read_csv(here::here("./data/MilkStates2016.csv"))
-knitr::kable(milkState[0,1:21], caption = "All Variables",
-             row.names = F,font_size = 15,show_col_types = TRUE)
-```
 
 
 ```{r, echo=FALSE, results='asis'}
