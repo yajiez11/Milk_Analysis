@@ -8,7 +8,15 @@ more comprehensively.
 
 
 ## Description of the first interactive plot
-The first interactive plot is a graph with multiple lines, where each line represents a State of the United States. Each State has been assigned with a color so it is easier for the reader to recognize each State. Colors are randomlly assigned because similar colors represent connections in some way, and it is not reasonable to assume that there are relationships among each State regarding to the total revenue gained. It is easier for the readers to compare the trend of the total revenue gained among different States, or to find the trend of changing in total revenue among years of one State.The advantage of this graph is that it can show the total revenue trend very clearly! However, the disadvantage is that is it difficult to compare which parts of the United States tend to receive more revenue on seeling milk or milk product. That means, the distribution of the total revenue of States cannot be shown on this graph.
+The first interactive plot is a graph with multiple lines, where each line represents a State of 
+the United States. Each State has been assigned with a color so it is easier for the reader to recognize
+each State. Colors are randomlly assigned because similar colors represent connections in some way, and 
+it is not reasonable to assume that there are relationships among each State regarding to the total revenue 
+gained. It is easier for the readers to compare the trend of the total revenue gained among different States, 
+or to find the trend of changing in total revenue among years of one State.The advantage of this graph is 
+that it can show the total revenue trend very clearly! However, the disadvantage is that is it difficult to 
+compare which parts of the United States tend to receive more revenue on selling milk or milk product. That 
+means, the distribution of the total revenue of States cannot be shown on this graph.
 
 
 
@@ -25,13 +33,17 @@ The first interactive plot is a graph with multiple lines, where each line repre
 
 
 ## Description of the second interactive plot
-
+Compare to the previous plot, this interactive map plot is good at showing the distribution of the total revunue
+on a map of the United States, however, it is difficult to tell from this interactive plot about the change of 
+the total revenue of each States among the years since the "diiference in degree of blue" is not as clear as numbers.
 
 <iframe src="revenueMap.html" width="700" height="700"></iframe>
 
 
 * Instructions for using the map
-
+1. Movivng the mouse on the State to see the State's name and the total revenue in dollars 
+per hundred pounds of weight sold.
+2. Select the year on the upper left to see the total revenue map of year 2016-2020.
 
 
 * references:
