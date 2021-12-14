@@ -2,8 +2,8 @@
 
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE}
+
 library(dplyr)
 library(highcharter)
 library(ggplot2)
@@ -13,14 +13,14 @@ library(ggvis)
 library(RColorBrewer)
 
 
-raw_data <- read.csv(file = 'data/MilkStates2016.csv')
+raw_data <- readr::read_csv(here::here("./data/MilkStates2016.csv"))
 raw_data <- raw_data[, -c(1:2)]
 data_2016 <- raw_data[raw_data$Year == "2016",]
 data_2017 <- raw_data[raw_data$Year == "2017",]
 data_2018 <- raw_data[raw_data$Year == "2018",]
 data_2019 <- raw_data[raw_data$Year == "2019",]
 data_2020 <- raw_data[raw_data$Year == "2020",]
-raw_data_size <- read.csv(file = 'data/MilkSizes2016base.csv')
+raw_data_size <- readr::read_csv(here::here("./data/MilkSizes2016base.csv"))
 
 ```
 
@@ -30,7 +30,7 @@ First, in order to have a more intuitive understanding of the different items wi
 
 We then round the correlation matrix to 3 decimal places and use ggcorrplot function to plot the correlogram, in which a highly positive correlation is indicated by bright green and highly negative correlation is indicated by bright red, with white meaning weak correlation. From the correlogram we can easily interpret the relationships between some important features and also conduct some sanity checks to make sure the data we applied is correct. For example, it can be observed that the value of production less total costs listed has a very negative correlation with total costs listed, which makes sense. It can also be observed that total allocated overhead is very positively correlated with total costs listed. Overall, the pattern we can observe from this correlogram is that items under ‘Net Value’ category tends to have a positive correlation with items under ‘Gross Value of Production’ items, and a negative correlation with items under ‘Allocated Overhead’ and ‘Operating Costs’ categories, which meets our expectation because in general, net value equals gross value of production minus allocated overhead and operating costs.
 
-```{r Correlogram, echo=FALSE}
+```{r Correlogram, echo=FALSE,fig.width=15, fig.height=10}
 df <- raw_data %>%
   select(Region, Year, Item, Value)
 df_long_state <- pivot_wider(data = df, 
@@ -45,6 +45,7 @@ df_long_size <- pivot_wider(data = df_size,
 names(df_long_state)[1] <- 'Category'
 names(df_long_size)[1] <- 'Category'
 df_long <- rbind(df_long_state, df_long_size)
+#names(df_long) <- abbreviate(names(df_long), minlength = 8)
 corr <- round(cor(df_long[, -c(1:2)]), 3)
 library(ggcorrplot)
 ggcorrplot(corr, 
@@ -226,7 +227,7 @@ ggplot(ratio_state, aes(x = reorder(Region, Portion_of_milk_in_value), y = Porti
 ```
 Equivalently, we can conduct the same analysis on the data segmented by sizes of farms instead of states. From the plot, we note that the size of farms does not seem to have a direct correlation with the ratio of milk among gross value of production here. However, there exists a clear pattern of color from top to bottom, indicating that farms with larger sizes tend to be more profitable compared with smaller ones. Especially, farms with fewer than 50 cows all suffer from an overall loss. This can be explained by the economies of scale effect, meaning the cost advantages that are obtained due to larger scale of operation brings higher profit.
 ```{r Ratio of Milk sold among gross value of production for all production sizes, echo=FALSE}
-raw_data_size <- read.csv(file = 'data/MilkSizes2016base.csv')
+raw_data_size <- readr::read_csv(here::here("./data/MilkSizes2016base.csv"))
 raw_data_size <- raw_data_size[, -c(1:2)]
 
 gross_value_size <- raw_data_size[raw_data_size$ItemId == "380",]
@@ -293,7 +294,7 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
 In order to have a better understanding of how yearly revenue varies among states, we choose to use scatter plot to present the relationship between yearly profit and marketing costs. Here the profit per hundredweight sold is the value of production fewer operating costs, which can be seen as incoming cashflow per hundredweight of milk sold since we did not consider the allocated overhead here. Another factor we would like to consider here is the marketing cost, as marketing costs usually plays a critical role in determining if a company makes profit or not. We would like test if this held true for our milk production case. We decided to use a scatter plot to visualize the relationship between profit per hundredweight milk sold and marketing costs. In addition to the value of marketing costs, we figured it also makes sense to consider the ratio of marketing costs among total operating costs. So we calculated this ratio and use the color of dots to denote the ratio of marketing cost among total operating costs, with red meaning marketing costs weigh more than 2% among total operating costs and blue meaning less than 0.5%.
 In the scatter plot each circle means the profit per hundredweight sold vs. marketing cost per hundredweight sold for each state in one year. We can see that Pennsylvania both has the highest marketing cost per hundredweight sold compared with other states and spends higher marketing cost among operating cost. However, it does not help in making profit for Pennsylvania farms as it still suffers from a net loss among all years. Missouri, on the other side, has the lowest marketing cost per hundredweight sold compared with other states and spends lower marketing cost among operating cost. However, the overall profitability of Missouri and Pennsylvania doesn’t differ by a lot, disproving the significance of how marketing costs influences profitability in this case. As for California, the state with the most profitable milk farms, it does not have a high marketing cost per hundredweight sold but it does spend a large percentage of its operating costs on marketing. At least for California, we understand that spending money on marketing milk paid off, unlike Pennsylvania.
 ```{r Yearly profit estimation versus marketing costs, echo=FALSE}
-raw_data <- read.csv(file = 'data/MilkStates2016.csv')
+raw_data <- readr::read_csv(here::here("./data/MilkStates2016.csv"))
 raw_data <- raw_data[, -c(1:2)]
 raw_profit <- raw_data[raw_data$ItemId == "950", -c(1:2)]
 raw_marketing <- raw_data[raw_data$ItemId == "690", -c(1:2)]
@@ -313,11 +314,11 @@ ggplot(marketing_profit, aes(x = Marketing, y = Profit)) +
              col = "#656565", alpha = 0.5, size = 4, shape = 21) +
   # add chosen text annotations
   geom_text(aes(label = ifelse(Region  %in% c("U.S. total", "Pennsylvania"),
-                               paste(Region, Year, "→", sep = " "),'')),
+                               paste(Region, Year, "->", sep = " "),'')),
             hjust = 1.12, vjust = 0.3, col = "grey35") +
   geom_text(aes(label = ifelse(Region  %in% c("California", "Missouri"),
-                               paste("←", Region, Year, sep = " "),'')),
-            hjust = -0.12, vjust = 0.35, col = "grey35") +
+                               paste("<-", Region, Year, sep = " "),'')),
+            hjust = -0.12, vjust = 0.35, size = 2.5, col = "grey35") +
   # customize legend/color palette
   scale_fill_manual(name = "Marketing cost among operating cost",
                     values = c('#d7191c','#fdae61','#ffffbf','#abd9e9','#2c7bb6'),
