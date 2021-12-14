@@ -377,7 +377,7 @@ ggplot(marketing_profit, aes(x = Marketing, y = Profit)) +
   # add chosen text annotations
   geom_text(aes(label = ifelse(Region  %in% c("U.S. total", "Pennsylvania"),
                                paste(Region, Year, "->", sep = " "),'')),
-            hjust = 1.12, vjust = 0.3, col = "grey35") +
+            hjust = 1.12, vjust = 0.3, size = 2.5, col = "grey35") +
   geom_text(aes(label = ifelse(Region  %in% c("California", "Missouri"),
                                paste("<-", Region, Year, sep = " "),'')),
             hjust = -0.12, vjust = 0.35, size = 2.5, col = "grey35") +

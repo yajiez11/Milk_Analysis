@@ -47,7 +47,7 @@ per hundred pounds of weight sold.
 
 
 * references:
-These are the usefu examples of D3 graphs that help us learn how to draw the graph above.
+These are the useful examples of D3 graphs that help us learn how to draw the graph above.
 
 1. https://bl.ocks.org/dnprock/5215cc464cfb9affd283
 
