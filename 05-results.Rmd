@@ -55,6 +55,10 @@ ggcorrplot(corr,
            title = 'Correlogram of milk production data items')
 
 ```
+
+<br>
+<br>
+
 We are interested in the movement of unit milk price across different years from 2016 to 2020. Since it is a univariate analysis, it makes sense to use a histogram to visualize its distribution. We also chose to use facet wrap function to graph the price distribution in different years. To better illustrate the distribution, we add a trend line to highlight the peak and tails. As we can see from the graph, the unit price of milk does not follow a constant increasing trend. In 2016, the peak lies at about $17 per hundredweight, and it goes up in 2017 to around $18.5. Then in 2018, it fell back to even a lower level than 2016. In 2019, the peak of unit milk price suddenly increased to around $19.5 per hundredweight, followed by a slight decrease back to around $18.5 in 2020. Overall, we don’t observe any patterns from the milk unit price, other than the fact that it is always changing.
 
 ```{r, echo=FALSE}
@@ -80,6 +84,10 @@ ggplot(milk_sold_gross_value, aes(x = Milk_sold, y = ..density.., color = Year))
   theme(plot.caption = element_text(color = "grey68"))
 
 ```
+
+<br>
+<br>
+
 We also utilized the ggvis package to build an interactive histogram that summarizes all the unit milk prices over the last 5 years. By dragging the width bar, we are able to change to change the number of bins respectively. For example, if we set the bar width to be 1.1, we notice the peak of milk price in the last 5 years lies between $18 and $19.
 ```{r Milk price distribution interactive, echo=FALSE}
 milk_sold <- raw_data %>%
@@ -90,6 +98,10 @@ milk_sold_gross_value %>% ggvis(~Milk_sold) %>%
                    width = input_slider(0.1, 2, value = .1, 
                                         step = .1, label = "width"))
 ```
+
+<br>
+<br>
+
 Over the years, one thing we are interested in is how the U.S. total milk production in pounds moves. Although our original datasets do not include that part of information, we are able to download the data from USDA’s QuickStats tool [here.]( https://quickstats.nass.usda.gov/#882A88E6-5AF3-3A25-8943-4625066326B8)
 
 This dataset includes the time series data of U.S. total milk production from 2000 to 2020. Since the granularity of data available is only specific to month of year, we impute the date to be the 15th of each month to convert the combination of year and month to a date. We then visualized the movement of milk production in lbs from 2000 to 2020 in the following graph, using color to represent the production level. As we can observe here, the milk production follows a steady increase trend across years, with some up-and-downs fluctuating within smaller intervals. An obvious explanation to this trend is that cows have milking seasons within years, and over longer terms the increase of population demands higher milk output over time.
@@ -112,6 +124,9 @@ ggplot(data = df, aes(x = date, y = Value, color = Value))+
   labs(x = "Month of Year", y = "Production")
 ```
 
+<br>
+<br>
+
 We may also visualize the total production in one year in each subplot and use facet wrap function to split between different years. As we can observe from the second graph, we noticed the milk output in each year tends to reach peak between March and May, and usually has a low point in February. The increasing trend over years can also be easily observed here because of the color change. We can see an obvious line color change from red to green, meaning the total production level increases over years.
 ```{r Total production movement faceted, echo=FALSE,fig.width=15, fig.height=9}
 options(scipen=10000)
@@ -125,6 +140,10 @@ ggplot(df, aes(Month, Value, color = Value)) + geom_line() +
   theme(legend.title = element_blank())
 
 ```
+
+<br>
+<br>
+
 One aspect of this data we are particularly interested in is the profitability for milk farms across the country, which can be indicated by the item: gross value of production less total costs. The value of production less total costs listed, which can be read equivalently as profit, is calculated by subtracting the total cost listed from the total gross value of production. We noticed there are gross value of production less operating costs as well, but for the purpose of analysis we consider both operating costs and allocated overhead as it’s a more comprehensive reflection of the profitability across all major milk production states in the U.S. We used a highchart to present the value of production less total costs listed distribution in 2020 among the states on a map. The reason why we choose highchart is that it can show a clear distribution of different states along with comparison of values between them given the Region field from dataset. By moving the cursor on top of each state, we can get the detail number of the profit in $ per hundredweight milk sold. 
 
 The existence of grey states in the graph are due to the lack of data in these states. As we covered in the missing data pattern section, most U.S. states in the mid region are not major U.S. states, while most major milk production states lie in either the Northeast part or the Northwest part of U.S. As we can see from the color bar, when the color of a state is redder, it presents less value of production less total costs listed, which means a more negative profit. Vice versa, when the color of a state is greener, it shows more value of production fewer total costs listed which means more profit. From the plot we can find the northeast of United States has relatively more loss, especially Vermont has the highest loss among all states. However, in the west side things gets better. In Washington, Oregon, and California there are all positive profit numbers. Especially in California, the profit reaches 2.48 dollars per hundred weights sold which is the highest in United States. It might because California has more suitable climate and larger grassland area, or there might be other reasons causing this, but we are not currently able to draw the conclusion from this graph.
@@ -158,6 +177,10 @@ highchart() %>%
   hc_exporting(enabled = TRUE)
 
 ```
+
+<br>
+<br>
+
 The last graph can only visualize how different states make profits in one year. We can also use the hc_motion function from highcharter to visualize the same results across different years. Here the color of each state still represents the unit profit per hundredweight milk, and we can drag the bar on bottom left to select different years.  Across the recent 5 years, we observed that California still stands as the most profitable milk production state. Since 2019, most northeast milk production states continued to suffer from net loss, potentially due to the competition between farms.
 ```{r Profit of 2016 on map Interactive, echo=FALSE}
 profit <- raw_data %>%
@@ -200,9 +223,14 @@ highchart(type = "map") %>%
   hc_exporting(enabled = TRUE)
 
 ```
+
+<br>
+<br>
+
 From the gross value of production categories, we can observe usually milk sold consists of a bulk among the total value of productions. So we are curious about how the percentage of milk sold among gross value of production distributes in different states, and how that has an influence upon the profitability of milk production in each state. Since Cleveland Dot Plot is a nice way to visualize a ratio, considering a bar chart here is too cluttered because there are many states. 
 We draw a Cleveland Dot Plot by picking gross value, milk sold and profit from the original dataset. After combining them into a tidy long dataframe, we calculate the portion of milk sold in gross value of production. We also set a color palette to make sure the profit color representation is consistent: a green dot implies high profit, and a red dot implies overall high loss per hundredweight milk sold. The x-axis represents the percentage of milk sold value among gross value of production. We have also reordered the states so that they are ordered in descending order of ratio we just calculated. The dots representing U.S. total are highlighted to be larger for easier observation.
 As we can observe from the dot plot, the distribution of milk among production value ratio ranges between 0.8 and 1. Maine is the state in which the milk sold value weighs the most within the total gross production value, and Illinois is the state where it weighs the least. We also observed that most profitable states tend not to have a too high, or too low milk among production value ratio, for example, California, Wisconsin, and Oregon. And states with either an extremely high or low ratio suffer from overall loss per hundredweight sold, as indicated by the red dots we see.
+
 ```{r Ratio of Milk sold among gross value of production for all production states, echo=FALSE}
 gross_value <- raw_data[raw_data$ItemId == "380",]
 milk_sold <- raw_data[raw_data$ItemId == "220",]
@@ -227,6 +255,10 @@ ggplot(ratio_state, aes(x = reorder(Region, Portion_of_milk_in_value), y = Porti
   sc
 
 ```
+
+<br>
+<br>
+
 Equivalently, we can conduct the same analysis on the data segmented by sizes of farms instead of states. From the plot, we note that the size of farms does not seem to have a direct correlation with the ratio of milk among gross value of production here. However, there exists a clear pattern of color from top to bottom, indicating that farms with larger sizes tend to be more profitable compared with smaller ones. Especially, farms with fewer than 50 cows all suffer from an overall loss. This can be explained by the economies of scale effect, meaning the cost advantages that are obtained due to larger scale of operation brings higher profit.
 ```{r Ratio of Milk sold among gross value of production for all production sizes, echo=FALSE}
 raw_data_size <- readr::read_csv(here::here("./data/MilkSizes2016base.csv"))
@@ -253,6 +285,10 @@ ggplot(ratio_size, aes(x = Size, y = Portion_of_milk_in_value, color = profit)) 
   sc
 
 ```
+
+<br>
+<br>
+
 From the last analysis part, we have observed how the size of farms has an influence on the profitability of farms. Here we would like to take a closer look at the variations among different sizes of farms and their outputs. For easier comparisons, we chose bar plots to compare the output of milk per cow in pounds among different sized farms. We chose to use bar chart because it is easy to understand and can show changes over time which is suitable for our analysis. As before, we use the color of bar to represent the profitability of farms of different sizes. From the graph we can observe that the medium size farm has largest output per cow. And the largest sized farms have higher output per cow compared with the smallest farms. It might because the larger size farm has more advanced technology along with better feed and breeds of cow. Note that since the unit output is the same across all years, we are only using the data from 2016 here. Same applies to the next graph.
 
 ```{r Output per cow among different sized farms, echo=FALSE}
@@ -278,6 +314,10 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
   theme(plot.caption = element_text(color = "grey68")) +
   scale_fill_gradientn(colours= myPalette(100), limits=c(-20, 5))
 ```
+
+<br>
+<br>
+
 We are also interested in the total outputs for different sized farms. We still use a bar chart to analyze the total outputs in pounds among different sized farms. Different from the previous one, at this time the total outputs are calculated by multiplying of output per cow and the number of cows among different sized farms. In this graph we can see that the larger farm has larger number of total outputs, which is in line with common sense. By observing the All Sizes bar, we can have some interesting finding. The All Sizes represent the average outputs in pounds among different sized farms. Here the total output corresponding to All Sizes is very close to the value of smaller (100-199 cows) farms. So, it is reasonable to infer that the small farms accounts for most of the farms included in the United States. 
 ```{r Total outputs in pounds among different sized farms, echo=FALSE}
 t$total_output = t$output*t$milk_cow
@@ -293,6 +333,10 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
 
 
 ```
+
+<br>
+<br>
+
 In order to have a better understanding of how yearly revenue varies among states, we choose to use scatter plot to present the relationship between yearly profit and marketing costs. Here the profit per hundredweight sold is the value of production fewer operating costs, which can be seen as incoming cashflow per hundredweight of milk sold since we did not consider the allocated overhead here. Another factor we would like to consider here is the marketing cost, as marketing costs usually plays a critical role in determining if a company makes profit or not. We would like test if this held true for our milk production case. We decided to use a scatter plot to visualize the relationship between profit per hundredweight milk sold and marketing costs. In addition to the value of marketing costs, we figured it also makes sense to consider the ratio of marketing costs among total operating costs. So we calculated this ratio and use the color of dots to denote the ratio of marketing cost among total operating costs, with red meaning marketing costs weigh more than 2% among total operating costs and blue meaning less than 0.5%.
 In the scatter plot each circle means the profit per hundredweight sold vs. marketing cost per hundredweight sold for each state in one year. We can see that Pennsylvania both has the highest marketing cost per hundredweight sold compared with other states and spends higher marketing cost among operating cost. However, it does not help in making profit for Pennsylvania farms as it still suffers from a net loss among all years. Missouri, on the other side, has the lowest marketing cost per hundredweight sold compared with other states and spends lower marketing cost among operating cost. However, the overall profitability of Missouri and Pennsylvania doesn’t differ by a lot, disproving the significance of how marketing costs influences profitability in this case. As for California, the state with the most profitable milk farms, it does not have a high marketing cost per hundredweight sold but it does spend a large percentage of its operating costs on marketing. At least for California, we understand that spending money on marketing milk paid off, unlike Pennsylvania.
 ```{r Yearly profit estimation versus marketing costs, echo=FALSE}
@@ -340,6 +384,10 @@ ggplot(marketing_profit, aes(x = Marketing, y = Profit)) +
   theme(legend.position = c(0.832, 0.81))
 
 ```
+
+<br>
+<br>
+
 From the previous analysis, we can easily tell California is the one state that all farms from other states should learn from. What is the secret of California milk farms that makes them keep profitable in the long term?
 Our first hypothesis is California’s higher food price. Maybe the milk from California can sell as a better price, so the total value of production becomes naturally higher. To verify our guess, we visualized the items from gross value of production between California and U.S. total. This includes 3 items: cattle, milk sold and other incomes. Since all 3 items together make total value of production, we can use a stacked bar chart to represent them. As we can observe from this graph, California does not produce significantly higher value of milk compared to the average country level. So, this is not the reason why California milk farms are profitable. Another hypothesis is: if not revenue, then the reason must be the costs, as only these 2 terms are pertained to profit.
 ```{r Total operating costs and allocated overhead comparison from 2016 to 2020 in different regions, echo=FALSE}
@@ -360,6 +408,10 @@ ggplot(raw_data_net, aes(fill=Item, y=Value, x=Year)) +
   geom_bar(position="stack", stat="identity")
 
 ```
+
+<br>
+<br>
+
 To explore on this, we first visualized the 2 sources of costs, operating costs and allocated overhead of California versus all other states to see if we find something. In this graph, red bar represents total allocated overhead and blue bar represents total operating costs. We notice California farms did a good job controlling their costs: not only do they have a lower operating cost, but they also have a significantly low allocated overhead. This may most likely be caused by the economies of scale, but we’ll dig a little more into that.
 ```{r Distribution of all gross value of production from 2016 to 2020 in California Versus. U.S. Total, echo=FALSE}
 cal_total <- raw_data[raw_data$Region == "U.S. total" | raw_data$Region == "California",]
@@ -372,6 +424,10 @@ ggplot(cal_total_value, aes(fill=Item, y=Value, x=Year)) +
   scale_fill_brewer(palette="Set1")
 
 ```
+
+<br>
+<br>
+
 There are 2 parts of costs, and we are going to get into details on both of them. First, we can look at operating costs of California versus U.S. total. We still used a stacked bar chart to compare their components. We can observe that the purple bar, representing purchase feed, is a major part of operating costs. However, California farms even spend more money on purchase feed compared to national average. On the other hand, the light green bar, representing homegrown harvested feed, is the reason why California farms has a lower operating cost than other farms, as we can see it is significantly lower compared to national average. 
 ```{r Distribution of operating costs from 2016 to 2020 in California Versus. U.S. Total, echo=FALSE}
 cal_total <- raw_data[raw_data$Region == "U.S. total" | raw_data$Region == "California",]
@@ -384,6 +440,10 @@ ggplot(cal_total_operating, aes(fill=Item, y=Value, x=Year)) +
   geom_bar(position="stack", stat="identity") 
 
 ```
+
+<br>
+<br>
+
 Lastly, we can look at the allocated overhead part. The difference is very obvious. California farms spend much less on allocated overhead compared to national average farms, both in terms of total overhead, and in terms of opportunity cost of unpaid labor. California farms almost spend nothing on this item, while most farms in other parts of U.S. spent a considerate amount on this. We are able to draw the conclusion: California milk farms remains profitable compared to other farms in the U.S. because they generally do a good job controlling costs, especially including opportunity cost of unpaid labor and homegrown harvested feed. The reason why they can keep these 2 costs at a low level constantly is most likely due to economies of scale.
 ```{r Distribution of allocated overhead costs from 2016 to 2020 in California Versus. U.S. Total, echo=FALSE}
 cal_total_overhead <-  cal_total[cal_total$Category == "Allocated overhead" & cal_total$ItemId != "930",]
