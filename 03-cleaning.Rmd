@@ -2,11 +2,164 @@
 
 
 
+```{r, echo=FALSE}
+raw_data <- read.csv(file = 'data/MilkStates2016.csv')
+raw_data <- raw_data[, -c(1:2)]
+data_2016 <- raw_data[raw_data$Year == "2016",]
+data_2017 <- raw_data[raw_data$Year == "2017",]
+data_2018 <- raw_data[raw_data$Year == "2018",]
+data_2019 <- raw_data[raw_data$Year == "2019",]
+data_2020 <- raw_data[raw_data$Year == "2020",]
+```
+
+## Data Overview
+
+We collected most of our data from the United States Department of Agriculture website. The major data set we used, Annual Milk Cost of Production Estimates data by state and the size of operation from 2016 to 2020, is downloadable in the form of an Excel spreadsheet in these following links:
+[Split by State](https://www.ers.usda.gov/webdocs/DataFiles/52180/MilkStates2016%20base.xlsx?v=6376.9)
+
+[Split by Size of Operation](https://www.ers.usda.gov/webdocs/DataFiles/52180/MilkSizes2016%20base.xlsx?v=6376.9)
+)
+
+The 2 data sets, in Excel spreadsheet form, each contains 2 sheets. The first sheet is a pivot table, in which each segmentation, including either U.S. states or sizes of operations, is wide-pivoted and includes specific price-related information, such as items from value of production, operating costs, allocated overhead, and calculated information such as total costs and net value. In the second sheet, each of the pivoted information is in the tabular data sheet format, in which each row in the pivot table, is given an item ID, corresponding to specific items such as hired labor cost, taxes and insurance, gross value of milk sold, etc.
+
+1. Due to the nature of the data format, we can only process the tabular data. Therefore we load the second data sheet as a csv into RStudio. We present all the categories in the data below:
+
+```{r, echo=FALSE}
+library(dplyr)
+library(highcharter)
+library(ggplot2)
+library(tidyverse)
+
+
+raw_data <- read.csv(file = 'data/MilkStates2016.csv')
+nd <- as.data.frame(unique(raw_data[c('Category')]))
+row.names(nd)  <- c()
+knitr::kable(nd)
+```
+
+<br>
+<br>
+
+2. Each category correspond to multiple items, and we present all the items below:
+```{r, echo=FALSE}
+nd1 <- as.data.frame(unique(raw_data[c('Item')]))
+row.names(nd1)  <- c()
+knitr::kable(nd1)
+```
+
+<br>
+<br>
+
+
+
+
+
+
+3. Among the data set segmented by state, 7 operation sizes depending on the number of cows in production are included, plus one for U.S. total. We present all the regions as follows:
+```{r, echo=FALSE}
+raw_data_by_size <- read.csv(file = 'data/MilkSizes2016base.csv')
+nd2 <- as.data.frame(unique(raw_data_by_size[c('Size')]))
+row.names(nd2)  <- c()
+knitr::kable(nd2)
+```
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+4. Among the data set segmented by size of operations, include 19 U.S. major production states, plus one for U.S. total. We present all the regions as follows:
+```{r, echo=FALSE}
+nd3 <- as.data.frame(unique(raw_data[c('Region')]))
+row.names(nd3)  <- c()
+knitr::kable(nd3)
+```
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+## Data Preprocessing
+
+1. We first remove some of the excessive fields, such as the first 2 columns as there is no variations in these 2 fields.
+We can easily pick the data we want by filtering from the descriptive columns. For example, we can select all the data in one year, or selecting only the profit items (with item_ID = 950) corresponding to U.S. total.
+We may also use dplyr to select the desired columns and perform grouping.
+```{r, echo=FALSE}
+raw_data <- raw_data[, -c(1:2)]
+data_2016 <- raw_data[raw_data$Year == "2016",]
+data_2017 <- raw_data[raw_data$Year == "2017",]
+data_2018 <- raw_data[raw_data$Year == "2018",]
+data_2019 <- raw_data[raw_data$Year == "2019",]
+data_2020 <- raw_data[raw_data$Year == "2020",]
+
+profit_2016 <- data_2016[data_2016$ItemId == "950",]
+profit_2016 <- profit_2016[!profit_2016$Region=="U.S. total",]
+profit_2016<- profit_2016%>%
+  select(Region,Value)
+
+nd4 <- as.data.frame(profit_2016)
+row.names(nd4)  <- c()
+knitr::kable(nd4)
+```
+<br>
+<br>
+
+
+
+
+
+2. In the further analysis, we have also used joins in order to calculate ratios that use one value divided by another. For example, in order to calculate the percentage of milk sold value among the total gross value of production, we can do so:
+
+```{r, echo=FALSE}
+gross_value_2016 <- data_2016[data_2016$ItemId == "380",]
+milk_sold_2016 <- data_2016[data_2016$ItemId == "220",]
+gross_milk_2016 = full_join(gross_value_2016, milk_sold_2016, by = "Region")
+gross_milk_2016$portion_of_milk_in_value = gross_milk_2016$Value.y/gross_milk_2016$Value.x
+knitr::kable(gross_milk_2016$portion_of_milk_in_value)
+
+
+```
+
+<br>
+<br>
+
+
+
+
+3. We can easily use dplyr and tidyr to convert the format of the data from tabular long data to wide tidy data using pivot_wide function. Take the state milk production data for example:
+```{r, echo=FALSE}
+df <- raw_data %>%
+  select(Region, Year, Item, Value)
+df_long <- pivot_wider(data = df, 
+                             names_from = "Item",
+                             values_from = "Value")
+knitr::kable(df_long[c(1:5),])
+```
+
+
+
+<br>
+<br>
+
+
+
 
 
 
 ## Data Transformation for Interactive Plot
-Only used columns Region, Year and Value for the Total, gross value of production for the 
+1. Only used columns Region, Year and Value for the Total, gross value of production for the 
 interactive plots in section 6. This data file is called totalRevenue.csv
 ```{r}
 library(tidyverse)
@@ -19,9 +172,11 @@ knitr::kable(milkStates[c(1:7), ], caption = "Variable Used for Interactive Plot
 
 ```
 
+<br>
+<br>
 
 
-Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in 
+2. Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in 
 the interactive plot section. This data file is called totalRevenue_n.csv
 ```{r}
 milkStates <- read.csv(file = 'data/MilkStates2016.csv')

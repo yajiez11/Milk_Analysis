@@ -81,7 +81,9 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-transformation-for-interactive-plot"><i class="fa fa-check"></i><b>3.1</b> Data Transformation for Interactive Plot</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-overview"><i class="fa fa-check"></i><b>3.1</b> Data Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#data-preprocessing"><i class="fa fa-check"></i><b>3.2</b> Data Preprocessing</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#data-transformation-for-interactive-plot"><i class="fa fa-check"></i><b>3.3</b> Data Transformation for Interactive Plot</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
@@ -112,12 +114,679 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
-<div id="data-transformation-for-interactive-plot" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Data Transformation for Interactive Plot</h2>
-<p>Only used columns Region, Year and Value for the Total, gross value of production for the
-interactive plots in section 6. This data file is called totalRevenue.csv</p>
+<div id="data-overview" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Data Overview</h2>
+<p>We collected most of our data from the United States Department of Agriculture website. The major data set we used, Annual Milk Cost of Production Estimates data by state and the size of operation from 2016 to 2020, is downloadable in the form of an Excel spreadsheet in these following links:
+<a href="https://www.ers.usda.gov/webdocs/DataFiles/52180/MilkStates2016%20base.xlsx?v=6376.9">Split by State</a></p>
+<p><a href="https://www.ers.usda.gov/webdocs/DataFiles/52180/MilkSizes2016%20base.xlsx?v=6376.9">Split by Size of Operation</a>
+)</p>
+<p>The 2 data sets, in Excel spreadsheet form, each contains 2 sheets. The first sheet is a pivot table, in which each segmentation, including either U.S. states or sizes of operations, is wide-pivoted and includes specific price-related information, such as items from value of production, operating costs, allocated overhead, and calculated information such as total costs and net value. In the second sheet, each of the pivoted information is in the tabular data sheet format, in which each row in the pivot table, is given an item ID, corresponding to specific items such as hired labor cost, taxes and insurance, gross value of milk sold, etc.</p>
+<ol style="list-style-type: decimal">
+<li>Due to the nature of the data format, we can only process the tabular data. Therefore we load the second data sheet as a csv into RStudio. We present all the categories in the data below:</li>
+</ol>
 <table>
-<caption><span id="tab:unnamed-chunk-2">Table 3.1: </span>Variable Used for Interactive Plot</caption>
+<thead>
+<tr class="header">
+<th align="left">Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gross value of production</td>
+</tr>
+<tr class="even">
+<td align="left">Operating costs</td>
+</tr>
+<tr class="odd">
+<td align="left">Allocated overhead</td>
+</tr>
+<tr class="even">
+<td align="left">Costs listed</td>
+</tr>
+<tr class="odd">
+<td align="left">Net value</td>
+</tr>
+<tr class="even">
+<td align="left">Supporting information</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Each category correspond to multiple items, and we present all the items below:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Item</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Milk sold</td>
+</tr>
+<tr class="even">
+<td align="left">Cattle</td>
+</tr>
+<tr class="odd">
+<td align="left">Other income Â¹</td>
+</tr>
+<tr class="even">
+<td align="left">Total, gross value of production</td>
+</tr>
+<tr class="odd">
+<td align="left">Purchased feed</td>
+</tr>
+<tr class="even">
+<td align="left">Homegrown harvested feed</td>
+</tr>
+<tr class="odd">
+<td align="left">Grazed feed</td>
+</tr>
+<tr class="even">
+<td align="left">Total, feed costs</td>
+</tr>
+<tr class="odd">
+<td align="left">Veterinary and medicine</td>
+</tr>
+<tr class="even">
+<td align="left">Bedding and litter</td>
+</tr>
+<tr class="odd">
+<td align="left">Marketing</td>
+</tr>
+<tr class="even">
+<td align="left">Custom services</td>
+</tr>
+<tr class="odd">
+<td align="left">Fuel, lube, and electricity</td>
+</tr>
+<tr class="even">
+<td align="left">Repairs</td>
+</tr>
+<tr class="odd">
+<td align="left">Other, operating costs Â²</td>
+</tr>
+<tr class="even">
+<td align="left">Interest on operating capital</td>
+</tr>
+<tr class="odd">
+<td align="left">Total, operating costs</td>
+</tr>
+<tr class="even">
+<td align="left">Hired labor</td>
+</tr>
+<tr class="odd">
+<td align="left">Opportunity cost of unpaid labor</td>
+</tr>
+<tr class="even">
+<td align="left">Capital recovery of machinery and equipment Â³</td>
+</tr>
+<tr class="odd">
+<td align="left">Opportunity cost of land</td>
+</tr>
+<tr class="even">
+<td align="left">Taxes and insurance</td>
+</tr>
+<tr class="odd">
+<td align="left">General farm overhead</td>
+</tr>
+<tr class="even">
+<td align="left">Total, allocated overhead</td>
+</tr>
+<tr class="odd">
+<td align="left">Total, costs listed</td>
+</tr>
+<tr class="even">
+<td align="left">Value of production less total costs listed</td>
+</tr>
+<tr class="odd">
+<td align="left">Value of production less operating costs</td>
+</tr>
+<tr class="even">
+<td align="left">Milk cows</td>
+</tr>
+<tr class="odd">
+<td align="left">Output per cow</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Among the data set segmented by state, 7 operation sizes depending on the number of cows in production are included, plus one for U.S. total. We present all the regions as follows:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fewer than 50 cows</td>
+</tr>
+<tr class="even">
+<td align="left">50-99 cows</td>
+</tr>
+<tr class="odd">
+<td align="left">100-199 cows</td>
+</tr>
+<tr class="even">
+<td align="left">200-499 cows</td>
+</tr>
+<tr class="odd">
+<td align="left">500-999 cows</td>
+</tr>
+<tr class="even">
+<td align="left">1,000-1,999 cows</td>
+</tr>
+<tr class="odd">
+<td align="left">2,000 cows or more</td>
+</tr>
+<tr class="even">
+<td align="left">All sizes</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Among the data set segmented by size of operations, include 19 U.S. major production states, plus one for U.S. total. We present all the regions as follows:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">U.S. total</td>
+</tr>
+<tr class="even">
+<td align="left">California</td>
+</tr>
+<tr class="odd">
+<td align="left">Illinois</td>
+</tr>
+<tr class="even">
+<td align="left">Indiana</td>
+</tr>
+<tr class="odd">
+<td align="left">Iowa</td>
+</tr>
+<tr class="even">
+<td align="left">Kentucky</td>
+</tr>
+<tr class="odd">
+<td align="left">Maine</td>
+</tr>
+<tr class="even">
+<td align="left">Michigan</td>
+</tr>
+<tr class="odd">
+<td align="left">Minnesota</td>
+</tr>
+<tr class="even">
+<td align="left">Missouri</td>
+</tr>
+<tr class="odd">
+<td align="left">New York</td>
+</tr>
+<tr class="even">
+<td align="left">Ohio</td>
+</tr>
+<tr class="odd">
+<td align="left">Oregon</td>
+</tr>
+<tr class="even">
+<td align="left">Pennsylvania</td>
+</tr>
+<tr class="odd">
+<td align="left">Tennessee</td>
+</tr>
+<tr class="even">
+<td align="left">Utah</td>
+</tr>
+<tr class="odd">
+<td align="left">Vermont</td>
+</tr>
+<tr class="even">
+<td align="left">Virginia</td>
+</tr>
+<tr class="odd">
+<td align="left">Washington</td>
+</tr>
+<tr class="even">
+<td align="left">Wisconsin</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+</div>
+<div id="data-preprocessing" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data Preprocessing</h2>
+<ol style="list-style-type: decimal">
+<li>We first remove some of the excessive fields, such as the first 2 columns as there is no variations in these 2 fields.
+We can easily pick the data we want by filtering from the descriptive columns. For example, we can select all the data in one year, or selecting only the profit items (with item_ID = 950) corresponding to U.S. total.
+We may also use dplyr to select the desired columns and perform grouping.</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">California</td>
+<td align="right">0.94</td>
+</tr>
+<tr class="even">
+<td align="left">Illinois</td>
+<td align="right">-5.36</td>
+</tr>
+<tr class="odd">
+<td align="left">Indiana</td>
+<td align="right">-4.55</td>
+</tr>
+<tr class="even">
+<td align="left">Iowa</td>
+<td align="right">-2.17</td>
+</tr>
+<tr class="odd">
+<td align="left">Kentucky</td>
+<td align="right">-2.29</td>
+</tr>
+<tr class="even">
+<td align="left">Maine</td>
+<td align="right">-6.21</td>
+</tr>
+<tr class="odd">
+<td align="left">Michigan</td>
+<td align="right">-4.67</td>
+</tr>
+<tr class="even">
+<td align="left">Minnesota</td>
+<td align="right">-2.21</td>
+</tr>
+<tr class="odd">
+<td align="left">Missouri</td>
+<td align="right">-6.39</td>
+</tr>
+<tr class="even">
+<td align="left">New York</td>
+<td align="right">-6.08</td>
+</tr>
+<tr class="odd">
+<td align="left">Ohio</td>
+<td align="right">-3.70</td>
+</tr>
+<tr class="even">
+<td align="left">Oregon</td>
+<td align="right">-1.91</td>
+</tr>
+<tr class="odd">
+<td align="left">Pennsylvania</td>
+<td align="right">-5.13</td>
+</tr>
+<tr class="even">
+<td align="left">Tennessee</td>
+<td align="right">-5.85</td>
+</tr>
+<tr class="odd">
+<td align="left">Utah</td>
+<td align="right">-1.63</td>
+</tr>
+<tr class="even">
+<td align="left">Vermont</td>
+<td align="right">-6.96</td>
+</tr>
+<tr class="odd">
+<td align="left">Virginia</td>
+<td align="right">-3.62</td>
+</tr>
+<tr class="even">
+<td align="left">Washington</td>
+<td align="right">-0.72</td>
+</tr>
+<tr class="odd">
+<td align="left">Wisconsin</td>
+<td align="right">-0.86</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>In the further analysis, we have also used joins in order to calculate ratios that use one value divided by another. For example, in order to calculate the percentage of milk sold value among the total gross value of production, we can do so:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.8933121</td>
+</tr>
+<tr class="even">
+<td align="right">0.8796042</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8263209</td>
+</tr>
+<tr class="even">
+<td align="right">0.8824443</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8939394</td>
+</tr>
+<tr class="even">
+<td align="right">0.8931419</td>
+</tr>
+<tr class="odd">
+<td align="right">0.9314111</td>
+</tr>
+<tr class="even">
+<td align="right">0.8289269</td>
+</tr>
+<tr class="odd">
+<td align="right">0.9042609</td>
+</tr>
+<tr class="even">
+<td align="right">0.8868708</td>
+</tr>
+<tr class="odd">
+<td align="right">0.9191710</td>
+</tr>
+<tr class="even">
+<td align="right">0.8996781</td>
+</tr>
+<tr class="odd">
+<td align="right">0.9096126</td>
+</tr>
+<tr class="even">
+<td align="right">0.9029276</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8910192</td>
+</tr>
+<tr class="even">
+<td align="right">0.9075998</td>
+</tr>
+<tr class="odd">
+<td align="right">0.9130237</td>
+</tr>
+<tr class="even">
+<td align="right">0.8927318</td>
+</tr>
+<tr class="odd">
+<td align="right">0.8784615</td>
+</tr>
+<tr class="even">
+<td align="right">0.9050251</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>We can easily use dplyr and tidyr to convert the format of the data from tabular long data to wide tidy data using pivot_wide function. Take the state milk production data for example:</li>
+</ol>
+<table style="width:100%;">
+<colgroup>
+<col width="1%" />
+<col width="0%" />
+<col width="1%" />
+<col width="1%" />
+<col width="2%" />
+<col width="5%" />
+<col width="2%" />
+<col width="3%" />
+<col width="1%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="1%" />
+<col width="2%" />
+<col width="4%" />
+<col width="1%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="1%" />
+<col width="5%" />
+<col width="7%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="6%" />
+<col width="6%" />
+<col width="1%" />
+<col width="2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">Year</th>
+<th align="right">Milk sold</th>
+<th align="right">Cattle</th>
+<th align="right">Other income Â¹</th>
+<th align="right">Total, gross value of production</th>
+<th align="right">Purchased feed</th>
+<th align="right">Homegrown harvested feed</th>
+<th align="right">Grazed feed</th>
+<th align="right">Total, feed costs</th>
+<th align="right">Veterinary and medicine</th>
+<th align="right">Bedding and litter</th>
+<th align="right">Marketing</th>
+<th align="right">Custom services</th>
+<th align="right">Fuel, lube, and electricity</th>
+<th align="right">Repairs</th>
+<th align="right">Other, operating costs Â²</th>
+<th align="right">Interest on operating capital</th>
+<th align="right">Total, operating costs</th>
+<th align="right">Hired labor</th>
+<th align="right">Opportunity cost of unpaid labor</th>
+<th align="right">Capital recovery of machinery and equipment Â³</th>
+<th align="right">Opportunity cost of land</th>
+<th align="right">Taxes and insurance</th>
+<th align="right">General farm overhead</th>
+<th align="right">Total, allocated overhead</th>
+<th align="right">Total, costs listed</th>
+<th align="right">Value of production less total costs listed</th>
+<th align="right">Value of production less operating costs</th>
+<th align="right">Milk cows</th>
+<th align="right">Output per cow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2016</td>
+<td align="right">16.83</td>
+<td align="right">1.47</td>
+<td align="right">0.54</td>
+<td align="right">18.84</td>
+<td align="right">6.68</td>
+<td align="right">2.63</td>
+<td align="right">0.07</td>
+<td align="right">9.38</td>
+<td align="right">0.77</td>
+<td align="right">0.20</td>
+<td align="right">0.18</td>
+<td align="right">0.67</td>
+<td align="right">0.52</td>
+<td align="right">0.61</td>
+<td align="right">0</td>
+<td align="right">0.03</td>
+<td align="right">12.36</td>
+<td align="right">1.83</td>
+<td align="right">1.71</td>
+<td align="right">3.77</td>
+<td align="right">0.02</td>
+<td align="right">0.18</td>
+<td align="right">0.53</td>
+<td align="right">8.04</td>
+<td align="right">20.40</td>
+<td align="right">-1.56</td>
+<td align="right">6.48</td>
+<td align="right">245</td>
+<td align="right">21698</td>
+</tr>
+<tr class="even">
+<td align="left">U.S. total</td>
+<td align="right">2017</td>
+<td align="right">18.25</td>
+<td align="right">1.37</td>
+<td align="right">0.50</td>
+<td align="right">20.12</td>
+<td align="right">6.49</td>
+<td align="right">2.72</td>
+<td align="right">0.07</td>
+<td align="right">9.28</td>
+<td align="right">0.75</td>
+<td align="right">0.19</td>
+<td align="right">0.18</td>
+<td align="right">0.65</td>
+<td align="right">0.59</td>
+<td align="right">0.62</td>
+<td align="right">0</td>
+<td align="right">0.06</td>
+<td align="right">12.32</td>
+<td align="right">1.87</td>
+<td align="right">1.77</td>
+<td align="right">3.86</td>
+<td align="right">0.02</td>
+<td align="right">0.18</td>
+<td align="right">0.54</td>
+<td align="right">8.24</td>
+<td align="right">20.56</td>
+<td align="right">-0.44</td>
+<td align="right">7.80</td>
+<td align="right">245</td>
+<td align="right">21698</td>
+</tr>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2018</td>
+<td align="right">16.82</td>
+<td align="right">1.26</td>
+<td align="right">0.50</td>
+<td align="right">18.58</td>
+<td align="right">6.76</td>
+<td align="right">3.12</td>
+<td align="right">0.08</td>
+<td align="right">9.96</td>
+<td align="right">0.76</td>
+<td align="right">0.20</td>
+<td align="right">0.18</td>
+<td align="right">0.66</td>
+<td align="right">0.67</td>
+<td align="right">0.64</td>
+<td align="right">0</td>
+<td align="right">0.14</td>
+<td align="right">13.21</td>
+<td align="right">1.99</td>
+<td align="right">1.82</td>
+<td align="right">4.00</td>
+<td align="right">0.03</td>
+<td align="right">0.18</td>
+<td align="right">0.55</td>
+<td align="right">8.57</td>
+<td align="right">21.78</td>
+<td align="right">-3.20</td>
+<td align="right">5.37</td>
+<td align="right">245</td>
+<td align="right">21698</td>
+</tr>
+<tr class="even">
+<td align="left">U.S. total</td>
+<td align="right">2019</td>
+<td align="right">19.26</td>
+<td align="right">1.23</td>
+<td align="right">0.53</td>
+<td align="right">21.02</td>
+<td align="right">7.20</td>
+<td align="right">3.33</td>
+<td align="right">0.07</td>
+<td align="right">10.60</td>
+<td align="right">0.78</td>
+<td align="right">0.20</td>
+<td align="right">0.19</td>
+<td align="right">0.67</td>
+<td align="right">0.69</td>
+<td align="right">0.66</td>
+<td align="right">0</td>
+<td align="right">0.14</td>
+<td align="right">13.93</td>
+<td align="right">2.10</td>
+<td align="right">1.88</td>
+<td align="right">4.10</td>
+<td align="right">0.02</td>
+<td align="right">0.18</td>
+<td align="right">0.57</td>
+<td align="right">8.85</td>
+<td align="right">22.78</td>
+<td align="right">-1.76</td>
+<td align="right">7.09</td>
+<td align="right">245</td>
+<td align="right">21698</td>
+</tr>
+<tr class="odd">
+<td align="left">U.S. total</td>
+<td align="right">2020</td>
+<td align="right">18.87</td>
+<td align="right">1.27</td>
+<td align="right">0.51</td>
+<td align="right">20.65</td>
+<td align="right">6.93</td>
+<td align="right">3.11</td>
+<td align="right">0.07</td>
+<td align="right">10.11</td>
+<td align="right">0.78</td>
+<td align="right">0.20</td>
+<td align="right">0.18</td>
+<td align="right">0.67</td>
+<td align="right">0.58</td>
+<td align="right">0.67</td>
+<td align="right">0</td>
+<td align="right">0.03</td>
+<td align="right">13.22</td>
+<td align="right">2.20</td>
+<td align="right">1.92</td>
+<td align="right">4.13</td>
+<td align="right">0.02</td>
+<td align="right">0.18</td>
+<td align="right">0.58</td>
+<td align="right">9.03</td>
+<td align="right">22.25</td>
+<td align="right">-1.60</td>
+<td align="right">7.43</td>
+<td align="right">245</td>
+<td align="right">21698</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+</div>
+<div id="data-transformation-for-interactive-plot" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Data Transformation for Interactive Plot</h2>
+<ol style="list-style-type: decimal">
+<li>Only used columns Region, Year and Value for the Total, gross value of production for the
+interactive plots in section 6. This data file is called totalRevenue.csv</li>
+</ol>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 3.1: </span>Variable Used for Interactive Plot</caption>
 <thead>
 <tr class="header">
 <th align="left">Region</th>
@@ -163,10 +832,14 @@ interactive plots in section 6. This data file is called totalRevenue.csv</p>
 </tr>
 </tbody>
 </table>
-<p>Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in
-the interactive plot section. This data file is called totalRevenue_n.csv</p>
+<p><br>
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Changed the TotalRevenue.csv a little bit by using pivot_wider, so it is easier to use in
+the interactive plot section. This data file is called totalRevenue_n.csv</li>
+</ol>
 <table>
-<caption><span id="tab:unnamed-chunk-3">Table 3.2: </span>Pivot Wider version of totalRevenue.csv</caption>
+<caption><span id="tab:unnamed-chunk-11">Table 3.2: </span>Pivot Wider version of totalRevenue.csv</caption>
 <thead>
 <tr class="header">
 <th align="left">Region</th>

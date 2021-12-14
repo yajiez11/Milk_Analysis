@@ -79,7 +79,10 @@
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#milk-cost-of-production-estimates"><i class="fa fa-check"></i><b>2.1</b> Milk Cost of Production Estimates</a></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#other-minor-date-set-used"><i class="fa fa-check"></i><b>2.2</b> Other Minor Date Set used</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-transformation-for-interactive-plot"><i class="fa fa-check"></i><b>3.1</b> Data Transformation for Interactive Plot</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
@@ -129,50 +132,29 @@ More details about the data set we used for this project are as follows:</p>
 <div id="milk-cost-of-production-estimates" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Milk Cost of Production Estimates</h2>
 <p>This data set was downloaded from the Economic Research Service contains the milk production data of the United States from 2016-2020. The data set has 2900 rows 21 columns.</p>
-<pre><code>##   Commodity          CommodityId    Category           CategoryId   
-##  Length:2900        Min.   :180   Length:2900        Min.   :1.000  
-##  Class :character   1st Qu.:180   Class :character   1st Qu.:2.000  
-##  Mode  :character   Median :180   Mode  :character   Median :2.000  
-##                     Mean   :180                      Mean   :2.655  
-##                     3rd Qu.:180                      3rd Qu.:3.000  
-##                     Max.   :180                      Max.   :6.000  
-##      Item              Item2               ItemId          Units          
-##  Length:2900        Length:2900        Min.   : 220.0   Length:2900       
-##  Class :character   Class :character   1st Qu.: 570.0   Class :character  
-##  Mode  :character   Mode  :character   Median : 815.0   Mode  :character  
-##                                        Mean   : 718.1                     
-##                                        3rd Qu.: 900.0                     
-##                                        Max.   :1070.0                     
-##    UnitsAbr            UnitsId         Region             RegionId    
-##  Length:2900        Min.   :193.0   Length:2900        Min.   : 10.0  
-##  Class :character   1st Qu.:230.0   Class :character   1st Qu.:167.5  
-##  Mode  :character   Median :230.0   Mode  :character   Median :215.0  
-##                     Mean   :229.1                      Mean   :207.6  
-##                     3rd Qu.:230.0                      3rd Qu.:262.5  
-##                     Max.   :240.0                      Max.   :310.0  
-##    Country            CountryId       Year          Value          
-##  Length:2900        Min.   :10   Min.   :2016   Min.   :  -10.210  
-##  Class :character   1st Qu.:10   1st Qu.:2017   1st Qu.:    0.270  
-##  Mode  :character   Median :10   Median :2018   Median :    1.225  
-##                     Mean   :10   Mean   :2018   Mean   :  717.476  
-##                     3rd Qu.:10   3rd Qu.:2019   3rd Qu.:    9.953  
-##                     Max.   :10   Max.   :2020   Max.   :23579.000  
-##  SurveyBaseYear         Note               Order            Size          
-##  Length:2900        Length:2900        Min.   : 350.0   Length:2900       
-##  Class :character   Class :character   1st Qu.: 720.0   Class :character  
-##  Mode  :character   Mode  :character   Median : 960.0   Mode  :character  
-##                                        Mean   : 861.7                     
-##                                        3rd Qu.:1050.0                     
-##                                        Max.   :1230.0                     
-##      SizeId  
-##  Min.   :90  
-##  1st Qu.:90  
-##  Median :90  
-##  Mean   :90  
-##  3rd Qu.:90  
-##  Max.   :90</code></pre>
+<pre><code>##   Commodity          CommodityId    Category           CategoryId        Item              Item2               ItemId      
+##  Length:2900        Min.   :180   Length:2900        Min.   :1.000   Length:2900        Length:2900        Min.   : 220.0  
+##  Class :character   1st Qu.:180   Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.: 570.0  
+##  Mode  :character   Median :180   Mode  :character   Median :2.000   Mode  :character   Mode  :character   Median : 815.0  
+##                     Mean   :180                      Mean   :2.655                                         Mean   : 718.1  
+##                     3rd Qu.:180                      3rd Qu.:3.000                                         3rd Qu.: 900.0  
+##                     Max.   :180                      Max.   :6.000                                         Max.   :1070.0  
+##     Units             UnitsAbr            UnitsId         Region             RegionId       Country            CountryId 
+##  Length:2900        Length:2900        Min.   :193.0   Length:2900        Min.   : 10.0   Length:2900        Min.   :10  
+##  Class :character   Class :character   1st Qu.:230.0   Class :character   1st Qu.:167.5   Class :character   1st Qu.:10  
+##  Mode  :character   Mode  :character   Median :230.0   Mode  :character   Median :215.0   Mode  :character   Median :10  
+##                                        Mean   :229.1                      Mean   :207.6                      Mean   :10  
+##                                        3rd Qu.:230.0                      3rd Qu.:262.5                      3rd Qu.:10  
+##                                        Max.   :240.0                      Max.   :310.0                      Max.   :10  
+##       Year          Value           SurveyBaseYear         Note               Order            Size               SizeId  
+##  Min.   :2016   Min.   :  -10.210   Length:2900        Length:2900        Min.   : 350.0   Length:2900        Min.   :90  
+##  1st Qu.:2017   1st Qu.:    0.270   Class :character   Class :character   1st Qu.: 720.0   Class :character   1st Qu.:90  
+##  Median :2018   Median :    1.225   Mode  :character   Mode  :character   Median : 960.0   Mode  :character   Median :90  
+##  Mean   :2018   Mean   :  717.476                                         Mean   : 861.7                      Mean   :90  
+##  3rd Qu.:2019   3rd Qu.:    9.953                                         3rd Qu.:1050.0                      3rd Qu.:90  
+##  Max.   :2020   Max.   :23579.000                                         Max.   :1230.0                      Max.   :90</code></pre>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-3">Table 2.1: </span>Major variables used</caption>
+<caption><span id="tab:unnamed-chunk-4">Table 2.1: </span>Major variables used</caption>
 <colgroup>
 <col width="24%" />
 <col width="13%" />
@@ -240,17 +222,19 @@ Region: states of the United States
 Year: the record year
 Value: the amount of money, corresponds to the categories of Item2</p>
 <p>Issues with this data set:</p>
-<p>Even though this data set is well organized. It still has some issues.
-1. The data value is not accurate enough to be used for analysis purposes.By reading the data
+<p>Even though this data set is well organized. It still has some issues.</p>
+<ol style="list-style-type: decimal">
+<li><p>The data value is not accurate enough to be used for analysis purposes.By reading the data
 set background on Economic Research Service’s official website, it is easier to find that some
 amount of the data is estimated by using actual data and model. It makes sense that it is
 difficult to ask and gather milk production and seeling data from farmers, because it requires
 lots of work, and farmers may even do not know exactly how much they paid or gained in the milk
-production industry.
-2. The data set only covers milk production data of 19 States of the United States. It could be
+production industry.</p></li>
+<li><p>The data set only covers milk production data of 19 States of the United States. It could be
 that the amount of milk production and seeling can be ignored compared to these 19 States.
 However, it is imappropreate to just treat the milk production of the other States as
-“NO MILK PRODUCED” at all.</p>
+“NO MILK PRODUCED” at all.</p></li>
+</ol>
 </div>
 <div id="other-minor-date-set-used" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Other Minor Date Set used</h2>
@@ -260,7 +244,7 @@ name.tsv is a flie about the States names and their abbreviations of the United 
 (the data set has 60 rows 3 columns)</li>
 </ol>
 <table>
-<caption><span id="tab:unnamed-chunk-4">Table 2.2: </span>State Names</caption>
+<caption><span id="tab:unnamed-chunk-5">Table 2.2: </span>State Names</caption>
 <thead>
 <tr class="header">
 <th align="left">id</th>
