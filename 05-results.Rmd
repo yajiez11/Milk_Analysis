@@ -320,6 +320,7 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
   xlab("Size of farm") + ylab("Output per cow in pounds") + 
   ggtitle("Output per cow among different sized farms")+
   labs(fill="Profit") +
+  coord_flip()+
   scale_y_continuous() + theme(plot.title = element_text(face = "bold")) +
   theme(plot.caption = element_text(color = "grey68")) +
   scale_fill_gradientn(colours= myPalette(100), limits=c(-20, 5))
@@ -336,6 +337,7 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
   geom_bar(stat="identity")  + xlab("Size of farm") + ylab("Output per cow in pounds") + 
   ggtitle("Total outputs in pounds among different sized farms")+
   labs(fill="Time") +
+  coord_flip()+
   scale_y_continuous() + theme(plot.title = element_text(face = "bold")) +
   theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
   theme(plot.caption = element_text(color = "grey68"))+
@@ -351,7 +353,7 @@ ggplot(t, aes(x = fct_relevel(size, 'Fewer than 50 cows','50-99 cows','100-199 c
 
 In order to have a better understanding of how yearly revenue varies among states, we choose to use scatter plot to present the relationship between yearly profit and marketing costs. Here the profit per hundredweight sold is the value of production fewer operating costs, which can be seen as incoming cashflow per hundredweight of milk sold since we did not consider the allocated overhead here. Another factor we would like to consider here is the marketing cost, as marketing costs usually plays a critical role in determining if a company makes profit or not. We would like test if this held true for our milk production case. We decided to use a scatter plot to visualize the relationship between profit per hundredweight milk sold and marketing costs. In addition to the value of marketing costs, we figured it also makes sense to consider the ratio of marketing costs among total operating costs. So we calculated this ratio and use the color of dots to denote the ratio of marketing cost among total operating costs, with red meaning marketing costs weigh more than 2% among total operating costs and blue meaning less than 0.5%.
 In the scatter plot each circle means the profit per hundredweight sold vs. marketing cost per hundredweight sold for each state in one year. We can see that Pennsylvania both has the highest marketing cost per hundredweight sold compared with other states and spends higher marketing cost among operating cost. However, it does not help in making profit for Pennsylvania farms as it still suffers from a net loss among all years. Missouri, on the other side, has the lowest marketing cost per hundredweight sold compared with other states and spends lower marketing cost among operating cost. However, the overall profitability of Missouri and Pennsylvania doesn’t differ by a lot, disproving the significance of how marketing costs influences profitability in this case. As for California, the state with the most profitable milk farms, it does not have a high marketing cost per hundredweight sold but it does spend a large percentage of its operating costs on marketing. At least for California, we understand that spending money on marketing milk paid off, unlike Pennsylvania.
-```{r Yearly profit estimation versus marketing costs, echo=FALSE}
+```{r Yearly profit estimation versus marketing costs, echo=FALSE, fig.width = 10, fit.height = 30}
 raw_data <- readr::read_csv(here::here("./data/MilkStates2016.csv"))
 raw_data <- raw_data[, -c(1:2)]
 raw_profit <- raw_data[raw_data$ItemId == "950", -c(1:2)]
@@ -404,7 +406,7 @@ ggplot(marketing_profit, aes(x = Marketing, y = Profit)) +
 
 From the previous analysis, we can easily tell California is the one state that all farms from other states should learn from. What is the secret of California milk farms that makes them keep profitable in the long term?
 Our first hypothesis is California’s higher food price. Maybe the milk from California can sell as a better price, so the total value of production becomes naturally higher. To verify our guess, we visualized the items from gross value of production between California and U.S. total. This includes 3 items: cattle, milk sold and other incomes. Since all 3 items together make total value of production, we can use a stacked bar chart to represent them. As we can observe from this graph, California does not produce significantly higher value of milk compared to the average country level. So, this is not the reason why California milk farms are profitable. Another hypothesis is: if not revenue, then the reason must be the costs, as only these 2 terms are pertained to profit.
-```{r Total operating costs and allocated overhead comparison from 2016 to 2020 in different regions, echo=FALSE}
+```{r Total operating costs and allocated overhead comparison from 2016 to 2020 in different regions, echo=FALSE, fig.width=15, fig.height=6}
 cal_total <- raw_data[raw_data$Region == "U.S. total" | raw_data$Region == "California",]
 cal_total_value <- cal_total[cal_total$ItemId == "380",]
 cal_total_oper <- cal_total[cal_total$ItemId == "840",]
