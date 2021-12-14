@@ -41,7 +41,7 @@ the total revenue of each States among the years since the "diiference in degree
 
 
 * Instructions for using the map
-1. Movivng the mouse on the State to see the State's name and the total revenue in dollars 
+1. Moving the mouse on the State to see the State's name and the total revenue in dollars 
 per hundred pounds of weight sold.
 2. Select the year on the upper left to see the total revenue map of year 2016-2020.
 
@@ -49,14 +49,14 @@ per hundred pounds of weight sold.
 * references:
 These are the usefu examples of D3 graphs that help us learn how to draw the graph above.
 
-1.references: https://bl.ocks.org/dnprock/5215cc464cfb9affd283
+1. https://bl.ocks.org/dnprock/5215cc464cfb9affd283
 
-2.references:https://bl.ocks.org/mbostock/4060606
+2. https://bl.ocks.org/mbostock/4060606
 
-3.references: https://bl.ocks.org/adamjanes/6cf85a4fd79e122695ebde7d41fe327f
+3. https://bl.ocks.org/adamjanes/6cf85a4fd79e122695ebde7d41fe327f
 
-4.references: https://bl.ocks.org/denisemauldin/3436a3ae06f73a492228059a515821fe
+4. https://bl.ocks.org/denisemauldin/3436a3ae06f73a492228059a515821fe
 
-5.references: https://gist.github.com/lbui30/65c2707e615841efaf35959aedac8ca9
+5. https://gist.github.com/lbui30/65c2707e615841efaf35959aedac8ca9
 
 

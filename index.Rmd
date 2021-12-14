@@ -23,13 +23,10 @@ milk products, and etc. The cost categories of milk production includes hiring l
 insurance cost, and etc. From the data set, we would like to know the following question:
 
 
-1. What is the difference in returns of milk production among different states from the 
-Gross Value of Production (Milk Sold, Cattle, and other income)?
-
-2. How does the cost of hiring labor changed from 2016 to 2020 in the New York State?
-
-3. Is there any positive or negative correlation between the cost of Purchased Feed and 
-the profit of Milk Sold from 2016 to 2020?
+1. Which U.S. states have the most or least profitable milk farms?
+2. What are the reasons farms can maintain high profitability?
+3. How does milk production differ from large to small sized farms?
+4. What is the relationship between milk production profit and marketing costs?
 
 
 In the next chapters, we will discuss about these questions, and provide our insights regarding to 
