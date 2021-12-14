@@ -1,12 +1,6 @@
 # Results
 
 
----
-title: "Results"
-author: "Yajie Zhang"
-date: "2021/12/13"
-output: html_document
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
