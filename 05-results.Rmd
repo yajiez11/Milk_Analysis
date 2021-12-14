@@ -30,7 +30,7 @@ First, in order to have a more intuitive understanding of the different items wi
 
 We then round the correlation matrix to 3 decimal places and use ggcorrplot function to plot the correlogram, in which a highly positive correlation is indicated by bright green and highly negative correlation is indicated by bright red, with white meaning weak correlation. From the correlogram we can easily interpret the relationships between some important features and also conduct some sanity checks to make sure the data we applied is correct. For example, it can be observed that the value of production less total costs listed has a very negative correlation with total costs listed, which makes sense. It can also be observed that total allocated overhead is very positively correlated with total costs listed. Overall, the pattern we can observe from this correlogram is that items under ‘Net Value’ category tends to have a positive correlation with items under ‘Gross Value of Production’ items, and a negative correlation with items under ‘Allocated Overhead’ and ‘Operating Costs’ categories, which meets our expectation because in general, net value equals gross value of production minus allocated overhead and operating costs.
 
-```{r Correlogram, echo=FALSE,fig.width=15, fig.height=10}
+```{r Correlogram, echo=FALSE,fig.width=15, fig.height=9}
 df <- raw_data %>%
   select(Region, Year, Item, Value)
 df_long_state <- pivot_wider(data = df, 
@@ -57,7 +57,7 @@ ggcorrplot(corr,
 ```
 We are interested in the movement of unit milk price across different years from 2016 to 2020. Since it is a univariate analysis, it makes sense to use a histogram to visualize its distribution. We also chose to use facet wrap function to graph the price distribution in different years. To better illustrate the distribution, we add a trend line to highlight the peak and tails. As we can see from the graph, the unit price of milk does not follow a constant increasing trend. In 2016, the peak lies at about $17 per hundredweight, and it goes up in 2017 to around $18.5. Then in 2018, it fell back to even a lower level than 2016. In 2019, the peak of unit milk price suddenly increased to around $19.5 per hundredweight, followed by a slight decrease back to around $18.5 in 2020. Overall, we don’t observe any patterns from the milk unit price, other than the fact that it is always changing.
 
-```{r Milk price distribution, echo=FALSE}
+```{r, echo=FALSE}
 raw_milk_sold <- raw_data[raw_data$ItemId == "220", -c(1:2)]
 raw_gross_value <- raw_data[raw_data$ItemId == "380", -c(1:2)]
 
@@ -95,7 +95,7 @@ Over the years, one thing we are interested in is how the U.S. total milk produc
 This dataset includes the time series data of U.S. total milk production from 2000 to 2020. Since the granularity of data available is only specific to month of year, we impute the date to be the 15th of each month to convert the combination of year and month to a date. We then visualized the movement of milk production in lbs from 2000 to 2020 in the following graph, using color to represent the production level. As we can observe here, the milk production follows a steady increase trend across years, with some up-and-downs fluctuating within smaller intervals. An obvious explanation to this trend is that cows have milking seasons within years, and over longer terms the increase of population demands higher milk output over time.
 
 
-```{r Total production movement, echo=FALSE}
+```{r Total production movement, echo=FALSE,fig.width=15, fig.height=9}
 df <- read.csv(file = 'data/USTotal_production_in_lbs.csv')
 df <- df %>%
   select(Year, Month, Value)
@@ -113,7 +113,8 @@ ggplot(data = df, aes(x = date, y = Value, color = Value))+
 ```
 
 We may also visualize the total production in one year in each subplot and use facet wrap function to split between different years. As we can observe from the second graph, we noticed the milk output in each year tends to reach peak between March and May, and usually has a low point in February. The increasing trend over years can also be easily observed here because of the color change. We can see an obvious line color change from red to green, meaning the total production level increases over years.
-```{r Total production movement faceted, echo=FALSE}
+```{r Total production movement faceted, echo=FALSE,fig.width=15, fig.height=9}
+options(scipen=10000)
 ggplot(df, aes(Month, Value, color = Value)) + geom_line() +
   scale_color_gradient(low="red", high="springgreen") +
   ggtitle("U.S. Total Milk Production in lbs") +
@@ -122,6 +123,7 @@ ggplot(df, aes(Month, Value, color = Value)) + geom_line() +
   facet_wrap( ~ Year) +
   scale_x_continuous(name="Month of Year", breaks=c(1,4,7,10,12)) +
   theme(legend.title = element_blank())
+
 ```
 One aspect of this data we are particularly interested in is the profitability for milk farms across the country, which can be indicated by the item: gross value of production less total costs. The value of production less total costs listed, which can be read equivalently as profit, is calculated by subtracting the total cost listed from the total gross value of production. We noticed there are gross value of production less operating costs as well, but for the purpose of analysis we consider both operating costs and allocated overhead as it’s a more comprehensive reflection of the profitability across all major milk production states in the U.S. We used a highchart to present the value of production less total costs listed distribution in 2020 among the states on a map. The reason why we choose highchart is that it can show a clear distribution of different states along with comparison of values between them given the Region field from dataset. By moving the cursor on top of each state, we can get the detail number of the profit in $ per hundredweight milk sold. 
 

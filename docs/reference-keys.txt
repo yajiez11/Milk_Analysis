@@ -17,3 +17,6 @@ interactive-component
 description-of-the-first-interactive-plot
 description-of-the-second-interactive-plot
 conclusion
+tab:unnamed-chunk-3
+tab:r
+missing-data-overview

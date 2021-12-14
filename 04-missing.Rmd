@@ -1,3 +1,56 @@
 # Missing values
 
-The dataset we will use for our project does not have any missing value.
+```{r, echo=FALSE}
+
+library(tidyverse)
+library(dplyr)
+library(highcharter)
+library(ggplot2)
+library(tidyverse)
+library(knitr)
+library(ggvis)
+library(RColorBrewer)
+
+raw_data <- read.csv(file = 'data/MilkStates2016.csv')
+raw_data <- raw_data[, -c(1:2)]
+
+raw_data_by_size <- read.csv(file = 'data/MilkSizes2016base.csv')
+raw_data_by_size <- raw_data_by_size[, -c(1:2)]
+
+
+data_2016 <- raw_data[raw_data$Year == "2016",]
+```
+
+## Missing Data Overview
+In this section we present the missing data patterns for the data sets we worked with. First we look at if there exists missing data from the tabular form of data, i.e. each row represent one item value for a specific segementation in a year. We first look at the count of missing values of data by state: 
+```{r, echo=FALSE}
+knitr::kable(data.frame(column = names(raw_data), count = colSums(is.na(raw_data)),row.names = NULL) 
+              %>% arrange(desc(count)), 
+      caption = "Missing values of data by State",align = "l",full_width = F,table.attr = "style='width:30%;'")
+```
+It can be observed that no missing data is found. We have a very complete and high-quality data set. We can conduct the same analysis on another data set segmented by the size of operation to see if no missing data is found as well:
+```{r r, echo=FALSE}
+knitr::kable(data.frame(column = names(raw_data_by_size), count = colSums(is.na(raw_data_by_size)),row.names = NULL) 
+              %>% arrange(desc(count)), 
+      caption = "Missing values of data by Size",align = "l",full_width = F,table.attr = "style='width:30%;'")
+```
+By the output we see, our hypothesis is verified. Next, we can look at the missing data patterns in terms of regions in the United States. From the data overview, we knew that not all the states in the U.S have sufficient data to be collected. Using highcharter package, we can visualize the data availability of different states in the U.S. on a map. As we can see from the below graph, we notice that major milk production states have 2 distribution areas: The west coast and the northeast region. Most states in the mid region do not belong of major milk production states thus do not have available data here.
+
+```{r, echo=FALSE}
+missing_pattern <- data_2016[data_2016$ItemId == "220",][!data_2016$Region=="U.S. total",]
+missing_pattern$missing <- 1
+
+highchart() %>%
+  hc_title(text = "Missing Data Patterns in USDA Milk Cost of Production Dataset") %>%
+  hc_add_series_map(usgeojson, missing_pattern,
+                    name = "Data Availablity",
+                    value = "missing", joinBy = c("woename", "Region"),
+                    dataLabels = list(
+                      enabled = TRUE,
+                      format = "{point.properties.postalcode}"
+                    )
+  ) %>%  
+  hc_legend(enabled = FALSE) %>% 
+  hc_mapNavigation(enabled = TRUE) %>%
+  hc_exporting(enabled = TRUE)
+```
