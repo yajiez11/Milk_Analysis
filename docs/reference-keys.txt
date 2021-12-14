@@ -16,6 +16,13 @@ missing-values
 missing-data-overview
 results
 correlogram
+milk-price-distribution
+milk-production-movement-over-years
+milk-farm-profit-in-different-regions
+milk-sold-among-gross-valeu-of-production
+output-analysis-related-to-farm-sizes
+yearly-profit-versus-marketing-costs
+exploring-why-california-farms-remain-profitable-over-years
 interactive-component
 description-of-the-first-interactive-plot
 description-of-the-second-interactive-plot
