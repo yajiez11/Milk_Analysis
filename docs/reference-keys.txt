@@ -1,7 +1,9 @@
-tab:unnamed-chunk-4
-tab:unnamed-chunk-5
-tab:unnamed-chunk-15
-tab:unnamed-chunk-16
+tab:unnamed-chunk-8
+tab:unnamed-chunk-9
+tab:unnamed-chunk-19
+tab:unnamed-chunk-20
+tab:unnamed-chunk-23
+tab:r
 introduction
 data-sources
 milk-cost-of-production-estimates
@@ -11,12 +13,10 @@ data-overview
 data-preprocessing
 data-transformation-for-interactive-plot
 missing-values
+missing-data-overview
 results
 correlogram
 interactive-component
 description-of-the-first-interactive-plot
 description-of-the-second-interactive-plot
 conclusion
-tab:unnamed-chunk-3
-tab:r
-missing-data-overview
