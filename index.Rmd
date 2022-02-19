@@ -30,7 +30,7 @@ insurance cost, and etc. From the data set, we would like to know the following 
 
 
 In the next chapters, we will discuss about these questions, and provide our insights regarding to 
-these aspects in a new way. Hopefully, after reading our project, the authors will learn some interesting 
+these aspects in a new way. Hopefully, after reading our project, the readers will learn some interesting 
 facts about the milk production in the United States. Also, we will working hard to encourage the reader 
 to think about the Milk Production in the United States from different aspects after reading our project. 
 
